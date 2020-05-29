@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Text?>
+<View fx:id="login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" prefHeight="400.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.views.LoginPresenter">
+    <center>
+        <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="236.0" style="-fx-background-color: #f0ad4e;" BorderPane.alignment="CENTER">
+            <children>
+                <TextField fx:id="username" promptText="Korisnicko ime">
+                    <VBox.margin>
+                        <Insets/>
+                    </VBox.margin>
+                </TextField>
+                <PasswordField fx:id="password" promptText="Lozinka">
+                    <VBox.margin>
+                        <Insets top="25.0" />
+                    </VBox.margin>
+                </PasswordField>
+                <Button onMouseClicked="#login" alignment="CENTER" mnemonicParsing="false" opacity="0.88" prefHeight="33.0" prefWidth="121.0" style="-fx-background-color: #fff; -fx-text-fill: #000;" text="Prijavite se">
+                    <VBox.margin>
+                        <Insets top="15.0" />
+                    </VBox.margin>
+                    <effect>
+                        <DropShadow color="#e8d76b" radius="16.9175" spread="0.24" width="48.67" />
+                    </effect>
+                    <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                            <stops>
+                                <Stop color="BLACK" />
+                                <Stop color="WHITE" offset="1.0" />
+                            </stops>
+                        </LinearGradient>
+                    </textFill>
+                </Button>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nemate nalog?" wrappingWidth="94.78649020195007">
+                    <VBox.margin>
+                        <Insets top="8.0" />
+                    </VBox.margin>
+                </Text>
+                <Label onMouseClicked="#register" text="Registrujte se">
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Label>
+            </children>
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+        </VBox>
+    </center>
+    <top>
+        <ImageView fitHeight="62.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true" translateY="15.0" BorderPane.alignment="CENTER">
+            <image>
+                <Image url="@../images/logo.PNG" />
+            </image>
+        </ImageView>
+    </top>
+</View>
