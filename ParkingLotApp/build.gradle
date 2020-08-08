@@ -20,6 +20,7 @@ mainClassName = 'ba.unsa.etf.GluonApplication'
 
 dependencies {
     compile 'com.gluonhq:charm:5.0.2'
+    compile group: 'commons-validator', name: 'commons-validator', version: '1.4.0'
 }
 
 jfxmobile {
@@ -30,6 +31,7 @@ jfxmobile {
     }
     android {
         manifest = 'src/android/AndroidManifest.xml'
+        androidSdk = 'C:/Users/HP/AppData/Local/Android/Sdk'
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')

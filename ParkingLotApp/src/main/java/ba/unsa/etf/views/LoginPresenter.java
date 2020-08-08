@@ -2,6 +2,8 @@ package ba.unsa.etf.views;
 
 import ba.unsa.etf.http.HttpResponse;
 import ba.unsa.etf.http.HttpUtils;
+import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.TextField;
 import com.gluonhq.charm.glisten.mvc.View;
 import javafx.fxml.FXML;
@@ -11,13 +13,15 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
+import static ba.unsa.etf.GluonApplication.SIGNUP_VIEW;
+
 
 public class LoginPresenter {
     public static String TOKEN;
-    @FXML
-    private View login;
+
     @FXML
     private TextField username;
+
     @FXML
     private PasswordField password;
 
@@ -33,23 +37,28 @@ public class LoginPresenter {
 //    }
 
     public void register(MouseEvent mouseEvent) {
-        System.out.println("Registruj se");
-        System.out.println("java version: "+System.getProperty("java.version"));
-        System.out.println("javafx.version: " + System.getProperty("javafx.version"));
+        System.out.println("registruj se");
+
+        MobileApplication.getInstance().switchView(SIGNUP_VIEW);
     }
 
-    public void login(MouseEvent mouseEvent) {
+    public void login() {
+        HttpResponse httpResponse = null;
         try {
-            HttpResponse httpResponse = HttpUtils.POST("api/auth/signin", "{\"usernameOrEmail\":\"" + username.getText()+ "\",\"password\":\"" + password.getText() +"\"}", false);
+            httpResponse = HttpUtils.POST("api/auth/signin", "{\"usernameOrEmail\":\"" + username.getText()+ "\",\"password\":\"" + password.getText() +"\"}", false);
             System.out.println(httpResponse.getCode());
             System.out.println(httpResponse.getMessage());
             if(httpResponse.getCode() == 200)
                 //todo ovdje dodijelim vrijednost TOKENu i preusmjerim na HomePage (to ce biti sa drawer-om)
                 //todo napraviti homepage sa drawerom
-                TOKEN = httpResponse.getMessage().getString("accessToken");
+                TOKEN = httpResponse.getMessage().getJsonObject(0).getString("accessToken");
             //todo provjeriti slucaj kad code nije 200 i ispisati poruku u nekom popup-u
+            else {
+                Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
+                alert.showAndWait();
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+           System.out.println(e.getMessage());
         }
     }
 }

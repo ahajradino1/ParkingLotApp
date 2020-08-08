@@ -1,13 +1,14 @@
 package ba.unsa.etf.http;
 
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 
 public class HttpResponse {
     private int code;
-    private JsonObject message;
+    private JsonArray message;
 
-    public HttpResponse(int code, JsonObject message) {
+    public HttpResponse(int code, JsonArray message) {
         this.code = code;
         this.message = message;
     }
@@ -20,11 +21,11 @@ public class HttpResponse {
         this.code = code;
     }
 
-    public JsonObject getMessage() {
+    public JsonArray getMessage() {
         return message;
     }
 
-    public void setMessage(JsonObject message) {
+    public void setMessage(JsonArray message) {
         this.message = message;
     }
 }

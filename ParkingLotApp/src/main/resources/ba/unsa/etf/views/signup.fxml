@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.BottomNavigation?>
+<?import com.gluonhq.charm.glisten.control.BottomNavigationButton?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<View fx:id="signup" prefHeight="400.0" prefWidth="350.0" stylesheets="@signup.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.views.SignupPresenter">
+   <center>
+      <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="344.0" prefWidth="236.0" spacing="5.0" style="-fx-background-color: #f0ad4e;" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="firstName" promptText="Ime">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
+            <Label fx:id="firstNameValidator" textFill="#c80000" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lastName" promptText="Prezime">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
+            <Label fx:id="lastNameValidator" textFill="#c80000" visible="false">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" promptText="Email">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
+             <Label fx:id="emailValidator" text="This field is required!" textFill="#c80000" visible="false">
+                 <font>
+                     <Font size="10.0" />
+                 </font>
+             </Label>
+            <TextField fx:id="username" promptText="Korisničko ime">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></TextField>
+             <Label fx:id="usernameValidator" textFill="#c80000" visible="false">
+                 <font>
+                     <Font size="10.0" />
+                 </font>
+             </Label>
+            <PasswordField fx:id="password" promptText="Lozinka">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></PasswordField>
+             <Label fx:id="passwordValidator" textFill="#c80000" visible="false">
+                 <font>
+                     <Font size="10.0" />
+                 </font>
+             </Label>
+            <PasswordField fx:id="passwordConfirm" promptText="Potvrda lozinke">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></PasswordField>
+             <Label fx:id="confpassValidator" textFill="#c80000" visible="false">
+                 <font>
+                     <Font size="10.0" />
+                 </font>
+             </Label>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Odaberite sigurnosno pitanje:" wrappingWidth="162.3470458984375">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Text>
+            <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="Odaberite sigurnosno pitanje" visibleRowCount="3" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unesite vaš odgovor:">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Text>
+            <TextField fx:id="answer" promptText="Odgovor" />
+             <Label fx:id="answerValidator" textFill="#c80000" visible="false">
+                 <font>
+                     <Font size="10.0" />
+                 </font>
+             </Label>
+         </children></VBox>
+   </center>
+   <bottom>
+      <BottomNavigation BorderPane.alignment="CENTER">
+          <actionItems>
+              <BottomNavigationButton selected="true" text="NAZAD NA LOGIN">
+                  <graphic>
+                      <Icon content="RECENT_ACTORS" />
+                  </graphic>
+              </BottomNavigationButton>
+              <BottomNavigationButton fx:id="signupBtn" onMouseClicked="#signup" disable="true" text="REGISTRUJ SE">
+                  <graphic>
+                      <Icon content="FAVORITE" />
+                  </graphic>
+              </BottomNavigationButton>
+          </actionItems>
+      </BottomNavigation>
+   </bottom>
+</View>
