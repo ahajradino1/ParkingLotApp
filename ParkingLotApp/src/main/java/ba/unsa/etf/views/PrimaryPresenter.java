@@ -1,5 +1,6 @@
 package ba.unsa.etf.views;
 
+import ba.unsa.etf.GluonApplication;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
@@ -20,7 +21,7 @@ public class PrimaryPresenter {
             if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().getDrawer().open()));
+                        GluonApplication.menu.open()));
                 appBar.setTitleText("Primary");
                 appBar.getActionItems().add(MaterialDesignIcon.SEARCH.button(e -> 
                         System.out.println("Search")));

@@ -1,5 +1,6 @@
 package ba.unsa.etf.views;
 
+import ba.unsa.etf.GluonApplication;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -24,7 +25,7 @@ public class SecondaryPresenter {
             if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().getDrawer().open()));
+                        GluonApplication.menu.open()));
                 appBar.setTitleText("Secondary");
                 appBar.getActionItems().add(MaterialDesignIcon.FAVORITE.button(e -> 
                         System.out.println("Favorite")));
