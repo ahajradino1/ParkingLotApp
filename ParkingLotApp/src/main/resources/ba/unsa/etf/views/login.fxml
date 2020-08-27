@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.text.Text?>
-<View fx:id="login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" prefHeight="400.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.views.LoginPresenter">
+<View fx:id="login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" prefHeight="400.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.LoginPresenter">
     <center>
         <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" minHeight="-Infinity" prefHeight="305.0" prefWidth="236.0" style="-fx-background-color: #f0ad4e;" BorderPane.alignment="CENTER">
             <children>

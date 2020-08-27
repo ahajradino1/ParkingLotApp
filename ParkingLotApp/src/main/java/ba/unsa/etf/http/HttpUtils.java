@@ -3,13 +3,12 @@ package ba.unsa.etf.http;
 
 import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static ba.unsa.etf.views.LoginPresenter.TOKEN;
+import static ba.unsa.etf.presenters.LoginPresenter.TOKEN;
 
 public class HttpUtils {
     private HttpUtils() {}

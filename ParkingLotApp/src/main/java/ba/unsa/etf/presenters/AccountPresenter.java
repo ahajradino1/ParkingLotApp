@@ -1,4 +1,4 @@
-package ba.unsa.etf.views;
+package ba.unsa.etf.presenters;
 
 import ba.unsa.etf.GluonApplication;
 import com.gluonhq.charm.glisten.application.MobileApplication;
@@ -7,18 +7,18 @@ import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.fxml.FXML;
 
-public class HomePresenter {
-
+public class AccountPresenter {
     @FXML
-    private View homepage;
+    private View account;
 
     public void initialize() {
-        homepage.showingProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue) {
+        account.showingProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> GluonApplication.menu.open()));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
+                        GluonApplication.menu.open()));
+                appBar.setTitleText("Account settings");
             }
         });
-
     }
 }

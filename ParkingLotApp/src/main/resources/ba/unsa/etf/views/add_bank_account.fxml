@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<View prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.AddBankAccountPresenter">
+   <center>
+       <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="344.0" prefWidth="236.0" spacing="5.0" style="-fx-background-color: #f0ad4e;" BorderPane.alignment="CENTER">
+           <children>
+               <TextField fx:id="accountOwner">
+                   <VBox.margin>
+                       <Insets bottom="15.0" />
+                   </VBox.margin></TextField>
+               <TextField fx:id="creditCardNumber" promptText="Credit card number">
+                   <VBox.margin>
+                       <Insets />
+                   </VBox.margin></TextField>
+               <Label fx:id="cardNumberValidator" textFill="#c80000" visible="false">
+                   <font>
+                       <Font size="10.0" />
+                   </font>
+               </Label>
+               <TextField fx:id="cvc" promptText="CVC">
+                   <VBox.margin>
+                       <Insets />
+                   </VBox.margin></TextField>
+               <Label fx:id="cvcValidator" textFill="#c80000" visible="false">
+                   <font>
+                       <Font size="10.0" />
+                   </font>
+               </Label>
+               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your bank:" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="162.3470458984375">
+                   <VBox.margin>
+                       <Insets />
+                   </VBox.margin>
+               </Text>
+               <ComboBox fx:id="comboBoxBanks" prefWidth="150.0" visibleRowCount="3">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin></ComboBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pick expiry date:" />
+           <Button fx:id="openDialogBtn" alignment="CENTER" onAction="#openDialog" style="-fx-background-color: #f0ad4e;">
+               <graphic>
+                  <Icon content="PERM_CONTACT_CALENDAR" />
+               </graphic>
+            </Button>
+           <Label fx:id="expiryDateValidator" textFill="#c80000" visible="false">
+               <font>
+                   <Font size="10.0" />
+               </font>
+           </Label>
+           </children></VBox>
+   </center>
+   <bottom>
+      <Button fx:id="addAccBtn" disable="true" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addBankAccount" text="Add account" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+   </bottom>
+</View>

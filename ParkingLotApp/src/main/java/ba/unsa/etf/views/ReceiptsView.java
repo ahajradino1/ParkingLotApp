@@ -6,11 +6,10 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
-public class HomeView {
-
+public class ReceiptsView {
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("homepage.fxml"));
+            View view = FXMLLoader.load(LoginView.class.getResource("receipts.fxml"));
             view.setBottom(GluonApplication.bottomNavigation);
             return view;
         } catch (IOException e) {

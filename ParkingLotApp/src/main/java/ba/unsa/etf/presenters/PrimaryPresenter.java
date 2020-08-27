@@ -1,4 +1,4 @@
-package ba.unsa.etf.views;
+package ba.unsa.etf.presenters;
 
 import ba.unsa.etf.GluonApplication;
 import com.gluonhq.charm.glisten.application.MobileApplication;

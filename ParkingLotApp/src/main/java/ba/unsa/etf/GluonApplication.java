@@ -7,10 +7,13 @@ import com.gluonhq.charm.down.plugins.LifecycleService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.application.ViewStackPolicy;
 import com.gluonhq.charm.glisten.control.Avatar;
+import com.gluonhq.charm.glisten.control.BottomNavigation;
+import com.gluonhq.charm.glisten.control.BottomNavigationButton;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 
 public class GluonApplication extends MobileApplication {
@@ -20,7 +23,16 @@ public class GluonApplication extends MobileApplication {
     public static final String SIGNUP_VIEW = "Signup View";
     public static final String SIGNUP_SUCCESS_VIEW = "Signup Success View";
     public static final String HOMEPAGE_VIEW = "Home Page View";
+    public static final String RECEIPTS_VIEW = "Receipts View";
+    public static final String ACCOUNT_VIEW = "Account View";
+    public static final String BANK_ACCOUNTS_VIEW = "Bank Accounts View";
+    public static final String REGISTRATION_PLATES_VIEW = "Registration Plates View";
+    public static final String LOGOUT_VIEW = "Logout view";
+    public static final String ADD_BANK_ACCOUNT_VIEW = "Add Bank Account View";
+    public static final String ADD_BANK_ACC_SUCCESS_VIEW = "Successfully Added Bank Account View";
+
     public static NavigationDrawer menu = new NavigationDrawer();
+    public static BottomNavigation bottomNavigation = new BottomNavigation();
 
 
     @Override
@@ -29,9 +41,16 @@ public class GluonApplication extends MobileApplication {
         addViewFactory(SIGNUP_VIEW, () -> new SignupView().getView());
         addViewFactory(SIGNUP_SUCCESS_VIEW, () -> new SignupSuccessView().getView());
         addViewFactory(HOMEPAGE_VIEW, () -> new HomeView().getView());
+        addViewFactory(RECEIPTS_VIEW, () -> new ReceiptsView().getView());
+        addViewFactory(ACCOUNT_VIEW, () -> new AccountView().getView());
+        addViewFactory(BANK_ACCOUNTS_VIEW, () -> new BankAccountsView().getView());
+        addViewFactory(REGISTRATION_PLATES_VIEW, () -> new RegistrationPlatesView().getView());
+        addViewFactory(LOGOUT_VIEW, () -> new LogoutView().getView());
+        addViewFactory(ADD_BANK_ACCOUNT_VIEW, () -> new AddBankAccountView().getView());
+        addViewFactory(ADD_BANK_ACC_SUCCESS_VIEW, () -> new AddBankAccSuccessView().getView());
 
-        addViewFactory(PRIMARY_VIEW, () -> new PrimaryView().getView());
-        addViewFactory(SECONDARY_VIEW, () -> new SecondaryView().getView());
+        //addViewFactory(PRIMARY_VIEW, () -> new PrimaryView().getView());
+        //addViewFactory(SECONDARY_VIEW, () -> new SecondaryView().getView());
     }
 
     @Override
@@ -39,6 +58,7 @@ public class GluonApplication extends MobileApplication {
         Swatch.RED.assignTo(scene);
         scene.getStylesheets().add(GluonApplication.class.getResource("style.css").toExternalForm());
         createDrawer();
+        createBottomNavigation();
     }
 
 
@@ -50,11 +70,16 @@ public class GluonApplication extends MobileApplication {
         menu.setHeader(header);
 
         //todo osmisliti sta ce sve biti u ovom meniju -  za sad su one defaultne 3 opcije
-        final NavigationDrawer.Item primaryItem = new NavigationDrawer.ViewItem("Primary", MaterialDesignIcon.HOME.graphic(), PRIMARY_VIEW, ViewStackPolicy.SKIP);
-        final NavigationDrawer.Item secondaryItem = new NavigationDrawer.ViewItem("Secondary", MaterialDesignIcon.DASHBOARD.graphic(), SECONDARY_VIEW);
-        menu.getItems().addAll(primaryItem, secondaryItem);
+        final NavigationDrawer.Item receiptsItem = new NavigationDrawer.ViewItem("Receipts", MaterialDesignIcon.RECEIPT.graphic(), RECEIPTS_VIEW);
+        final NavigationDrawer.Item accountItem = new NavigationDrawer.ViewItem("Account", MaterialDesignIcon.PERSON.graphic(), ACCOUNT_VIEW);
+        final NavigationDrawer.Item bankAccountsItem = new NavigationDrawer.ViewItem("Bank accounts", MaterialDesignIcon.CREDIT_CARD.graphic(), BANK_ACCOUNTS_VIEW);
+        final NavigationDrawer.Item registrationPlatesItem = new NavigationDrawer.ViewItem("Registration plates", MaterialDesignIcon.DIRECTIONS_CAR.graphic(), REGISTRATION_PLATES_VIEW);
+        final NavigationDrawer.Item logoutItem = new NavigationDrawer.ViewItem("Logout", MaterialDesignIcon.EXIT_TO_APP.graphic(), LOGOUT_VIEW);
+        //final NavigationDrawer.Item primaryItem = new NavigationDrawer.ViewItem("Primary", MaterialDesignIcon.HOME.graphic(), PRIMARY_VIEW, ViewStackPolicy.SKIP);
+        //final NavigationDrawer.Item secondaryItem = new NavigationDrawer.ViewItem("Secondary", MaterialDesignIcon.DASHBOARD.graphic(), SECONDARY_VIEW);
+        menu.getItems().addAll(accountItem, receiptsItem, bankAccountsItem, registrationPlatesItem, logoutItem);
 
-        //todo ovo na kraju mogu da obrisem jer app nije predvidjena za desktop
+        //todo ovo na kraju treba da obrisem jer app nije predvidjena za desktop
         if (Platform.isDesktop()) {
             final NavigationDrawer.Item quitItem = new NavigationDrawer.Item("Quit", MaterialDesignIcon.EXIT_TO_APP.graphic());
             quitItem.selectedProperty().addListener((obs, ov, nv) -> {
@@ -64,6 +89,12 @@ public class GluonApplication extends MobileApplication {
             });
             menu.getItems().add(quitItem);
         }
+    }
+
+    public static void createBottomNavigation() {
+        BottomNavigationButton btn1 = new BottomNavigationButton("Find parking lot", MaterialDesignIcon.SEARCH.graphic(), e -> System.out.println("Nadji parking"));
+        BottomNavigationButton btn2 = new BottomNavigationButton("Tickets", MaterialDesignIcon.CREDIT_CARD.graphic(), e -> System.out.println("Aktivni parkinzi"));
+        bottomNavigation.getActionItems().addAll(btn1, btn2);
     }
 
 }

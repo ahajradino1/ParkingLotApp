@@ -1,4 +1,4 @@
-package ba.unsa.etf.views;
+package ba.unsa.etf.presenters;
 
 import ba.unsa.etf.http.HttpResponse;
 import ba.unsa.etf.http.HttpUtils;
