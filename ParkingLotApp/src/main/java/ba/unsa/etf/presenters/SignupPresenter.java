@@ -55,10 +55,7 @@ public class SignupPresenter {
 
     private Question chosenQuestion;
 
-    private boolean firstNameOk, lastNameOk, emailOk, usernameOk, passOk, confirmPassOk, answerOk;
-
     private final ObservableList<Question> sequrityQuestions = FXCollections.observableArrayList();
-
 
     @FXML
     public void initialize() {

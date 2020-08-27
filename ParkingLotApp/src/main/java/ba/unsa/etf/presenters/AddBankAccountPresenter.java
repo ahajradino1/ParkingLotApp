@@ -1,14 +1,19 @@
 package ba.unsa.etf.presenters;
 
+import ba.unsa.etf.GluonApplication;
 import ba.unsa.etf.http.HttpResponse;
 import ba.unsa.etf.http.HttpUtils;
 import ba.unsa.etf.models.Bank;
 import ba.unsa.etf.models.User;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Alert;
+import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.DatePicker;
 import com.gluonhq.charm.glisten.control.TextField;
+import com.gluonhq.charm.glisten.mvc.View;
+import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,6 +29,9 @@ import static ba.unsa.etf.GluonApplication.ADD_BANK_ACC_SUCCESS_VIEW;
 
 
 public class AddBankAccountPresenter {
+
+    @FXML
+    View addBankAccView;
 
     @FXML
     private Button addAccBtn;
@@ -58,14 +66,28 @@ public class AddBankAccountPresenter {
     private Bank chosenBank;
 
     public void initialize() {
+        addBankAccView.showingProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
+                        GluonApplication.menu.open()));
+              //  appBar.setTitleText("Bank accounts");
+            }
+        });
         getUserDetails();
         accountOwner.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         accountOwner.setDisable(true);
+//        getBanks();
+//        validateCardNumber();
+//        validateCvc();
+
+      //  datePicker.showAndWait().ifPresent(System.out::println);
+    }
+
+    public void onShown() {
         getBanks();
         validateCardNumber();
         validateCvc();
-
-      //  datePicker.showAndWait().ifPresent(System.out::println);
     }
 
     public void addBankAccount() {
@@ -187,6 +209,8 @@ public class AddBankAccountPresenter {
     }
 
     public void convertToObservableList (JsonArray dbBanks) {
+        bankList.clear();
+        System.out.println(bankList.size());
         for(int i = 0; i < dbBanks.size(); i++) {
             JsonObject bank = dbBanks.getJsonObject(i);
             bankList.add(new Bank((long) bank.getInt("id"), bank.getString("bankName")));

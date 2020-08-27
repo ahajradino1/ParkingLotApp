@@ -6,10 +6,10 @@ public class BankAccount {
     private Long id;
     private String accountOwner;
     private String bankName;
-    private Date expiryDate;
+    private String expiryDate;
     private String cardNumber;
 
-    public BankAccount(Long id, String accountOwner, String bankName, Date expiryDate, String cardNumber) {
+    public BankAccount(Long id, String accountOwner, String bankName, String expiryDate, String cardNumber) {
         this.id = id;
         this.accountOwner = accountOwner;
         this.bankName = bankName;
@@ -41,11 +41,11 @@ public class BankAccount {
         this.bankName = bankName;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 
