@@ -38,8 +38,7 @@ public class AddRegistrationPlatePresenter {
         addRegPlateView.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
-                        GluonApplication.menu.open()));
+                appBar.setNavIcon(MaterialDesignIcon.ARROW_BACK.button(event -> GluonApplication.getInstance().switchToPreviousView()));
             }
         });
     }

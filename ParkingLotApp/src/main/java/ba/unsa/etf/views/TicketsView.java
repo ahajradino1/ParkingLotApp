@@ -10,7 +10,6 @@ public class TicketsView {
     public View getView() {
         try {
             View view = FXMLLoader.load(LoginView.class.getResource("tickets.fxml"));
-          //  view.setBottom(GluonApplication.bottomNavigation);
             return view;
         } catch (IOException e) {
             System.out.println("IOException: " + e);

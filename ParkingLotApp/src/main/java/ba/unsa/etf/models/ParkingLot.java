@@ -6,17 +6,13 @@ public class ParkingLot {
     private String streetAddress;
     private String municipality;
     private double costPerHour;
-    private String workDays;
-    private String workTime;
 
-    public ParkingLot(Long id, String zoneCode, String streetAddress, String municipality, double costPerHour, String workDays, String workTime) {
+    public ParkingLot(Long id, String zoneCode, String streetAddress, String municipality, double costPerHour) {
         this.id = id;
         this.zoneCode = zoneCode;
         this.streetAddress = streetAddress;
         this.municipality = municipality;
         this.costPerHour = costPerHour;
-        this.workDays = workDays;
-        this.workTime = workTime;
     }
 
     public Long getId() {
@@ -57,21 +53,5 @@ public class ParkingLot {
 
     public void setCostPerHour(double costPerHour) {
         this.costPerHour = costPerHour;
-    }
-
-    public String getWorkDays() {
-        return workDays;
-    }
-
-    public void setWorkDays(String workDays) {
-        this.workDays = workDays;
-    }
-
-    public String getWorkTime() {
-        return workTime;
-    }
-
-    public void setWorkTime(String workTime) {
-        this.workTime = workTime;
     }
 }

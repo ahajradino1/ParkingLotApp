@@ -138,7 +138,7 @@ public class AddBankAccountPresenter {
             HttpResponse httpResponse = HttpUtils.GET("banks", true);
             dbBanks = httpResponse.getMessage();
             convertToObservableList(dbBanks);
-            comboBoxBanks.getSelectionModel().select(0);
+            comboBoxBanks.setPromptText("Choose bank");
             comboBoxBanks.getSelectionModel().selectedItemProperty()
                     .addListener((ChangeListener<Bank>) (observable, oldValue, newValue) -> chosenBank = newValue);
         } catch (IOException e) {

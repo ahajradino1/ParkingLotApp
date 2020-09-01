@@ -35,7 +35,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 import static ba.unsa.etf.GluonApplication.*;
 
@@ -71,7 +70,7 @@ public class HomePresenter {
     }
 
     public void onShown() {
-        setPanelItems();
+        setListItems();
         LocalDateTime withSecondsAndNano = LocalDateTime.now();
         currentDateTime = withSecondsAndNano.withNano(0);
         currentDateTime = currentDateTime.withSecond(0);
@@ -81,7 +80,7 @@ public class HomePresenter {
         getRegistrationPlates();
     }
 
-    public void setPanelItems() {
+    public void setListItems() {
         getParkingLots();
         if(parkingLots.size() != 0) {
             charmListView.setItems(parkingLots);
@@ -142,7 +141,7 @@ public class HomePresenter {
                 JsonArray dbParkingLots = httpResponse.getMessage();
                 for(int i = 0; i < dbParkingLots.size(); i++) {
                     JsonObject parkingLot = dbParkingLots.getJsonObject(i);
-                    parkingLots.add(new ParkingLot(parkingLot.getJsonNumber("id").longValue(), parkingLot.getString("zoneCode"), parkingLot.getString("streetAddress"), parkingLot.getString("municipality"), parkingLot.getJsonNumber("price").doubleValue(), parkingLot.getString("workDays"), parkingLot.getString("workTime")));
+                    parkingLots.add(new ParkingLot(parkingLot.getJsonNumber("id").longValue(), parkingLot.getString("zoneCode"), parkingLot.getString("streetAddress"), parkingLot.getString("municipality"), parkingLot.getJsonNumber("price").doubleValue()));
                 }
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
@@ -163,7 +162,7 @@ public class HomePresenter {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "By continuing you will be charged " + price + " KM for selected parking spot.");
                 alert.showAndWait().ifPresent(result -> {
                     if (result == ButtonType.OK) {
-                        proceedWithPayment(newValue.getId(), chosenBankAccount.getId(), chosenRegistrationPlate.getId(), currentDateTime, pickedDateTime, price);
+                        proceedWithPayment(newValue.getId(), chosenBankAccount.getId(), chosenRegistrationPlate.getId(), currentDateTime.toString() + "+02:00", pickedDateTime.toString() + "+02:00", price);
                     }
                 });
             });
@@ -191,8 +190,8 @@ public class HomePresenter {
     private void proceedWithPayment(Long parkingLotId,
                                     Long bankAccountId,
                                     Long registrationPlateId,
-                                    LocalDateTime startingTime,
-                                    LocalDateTime endingTime,
+                                    String startingTime,
+                                    String endingTime,
                                     Double price) {
         HttpResponse httpResponse = null;
         try {
