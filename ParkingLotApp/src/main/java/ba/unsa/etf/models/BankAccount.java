@@ -1,7 +1,5 @@
 package ba.unsa.etf.models;
 
-import java.util.Date;
-
 public class BankAccount {
     private Long id;
     private String accountOwner;
@@ -55,5 +53,10 @@ public class BankAccount {
 
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String toString() {
+        return cardNumber;
     }
 }

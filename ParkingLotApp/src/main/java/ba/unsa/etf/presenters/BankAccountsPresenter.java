@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.ScrollPane;
@@ -33,9 +34,6 @@ public class BankAccountsPresenter {
 
     @FXML
     private View bankAccountsView;
-
-//    @FXML
-//    private ExpansionPanelContainer accountsContainer;
 
     private ObservableList<BankAccount> bankAccounts = FXCollections.observableArrayList();
 
@@ -66,13 +64,18 @@ public class BankAccountsPresenter {
 
                 // Label expiryDate = new Label(account.getExpiryDate().toString());
                 Button deleteBtn = new Button("DELETE");
-                int finalI = i;
                 deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        //send delete request
-                        deleteAccount(account.getId());
-                        accountsContainer.getItems().remove(finalI);
+                        Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "Are you sure you want to \n delete this bank account?");
+                        alert.showAndWait().ifPresent(result -> {
+                            if (result == ButtonType.OK) {
+                                //send delete request
+                                deleteAccount(account.getId());
+                                accountsContainer.getItems().remove(panel);
+                            }
+                        });
+
                     }
                 });
 
@@ -120,8 +123,7 @@ public class BankAccountsPresenter {
                 for(int i = 0; i < dbBankAccounts.size(); i++) {
                     JsonObject bankAccount = dbBankAccounts.getJsonObject(i);
                     //Date expiryDate = new SimpleDateFormat("yyyy-dd-MM").parse(bankAccount.getString("expiryDate"));
-                    System.out.println(bankAccount.getString("expiryDate").substring(0, 10));
-                    bankAccounts.add(new BankAccount((long)bankAccount.getInt("id"), bankAccount.getString("accountOwner"), bankAccount.getString("bankName"), bankAccount.getString("expiryDate").substring(0, 9), bankAccount.getString("cardNumber")));
+                    bankAccounts.add(new BankAccount((long)bankAccount.getInt("id"), bankAccount.getString("accountOwner"), bankAccount.getString("bankName"), bankAccount.getString("expiryDate").substring(0, 10), bankAccount.getString("cardNumber")));
                 }
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));

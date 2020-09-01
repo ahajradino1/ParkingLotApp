@@ -13,7 +13,6 @@ import com.gluonhq.charm.glisten.control.TextField;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -69,8 +68,7 @@ public class AddBankAccountPresenter {
         addBankAccView.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
-                        GluonApplication.menu.open()));
+                appBar.setNavIcon(MaterialDesignIcon.ARROW_BACK.button(event -> GluonApplication.getInstance().switchToPreviousView()));
               //  appBar.setTitleText("Bank accounts");
             }
         });
@@ -80,8 +78,6 @@ public class AddBankAccountPresenter {
 //        getBanks();
 //        validateCardNumber();
 //        validateCvc();
-
-      //  datePicker.showAndWait().ifPresent(System.out::println);
     }
 
     public void onShown() {
@@ -142,6 +138,7 @@ public class AddBankAccountPresenter {
             HttpResponse httpResponse = HttpUtils.GET("banks", true);
             dbBanks = httpResponse.getMessage();
             convertToObservableList(dbBanks);
+            comboBoxBanks.getSelectionModel().select(0);
             comboBoxBanks.getSelectionModel().selectedItemProperty()
                     .addListener((ChangeListener<Bank>) (observable, oldValue, newValue) -> chosenBank = newValue);
         } catch (IOException e) {

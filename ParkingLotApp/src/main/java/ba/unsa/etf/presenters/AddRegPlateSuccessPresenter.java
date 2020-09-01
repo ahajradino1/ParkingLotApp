@@ -1,14 +1,14 @@
 package ba.unsa.etf.presenters;
 
-
 import com.gluonhq.charm.glisten.application.MobileApplication;
-import static ba.unsa.etf.GluonApplication.BANK_ACCOUNTS_VIEW;
+
 import static ba.unsa.etf.GluonApplication.HOMEPAGE_VIEW;
+import static ba.unsa.etf.GluonApplication.REGISTRATION_PLATES_VIEW;
 
-public class AddBankAccSuccessPresenter {
+public class AddRegPlateSuccessPresenter {
 
-    public void backToAllAccounts() {
-        MobileApplication.getInstance().switchView(BANK_ACCOUNTS_VIEW);
+    public void backToAllPlates() {
+        MobileApplication.getInstance().switchView(REGISTRATION_PLATES_VIEW);
     }
 
     public void backToAllParkings() {

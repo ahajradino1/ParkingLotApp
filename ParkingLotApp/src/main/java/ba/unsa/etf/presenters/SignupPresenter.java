@@ -1,19 +1,24 @@
 package ba.unsa.etf.presenters;
 
+import ba.unsa.etf.GluonApplication;
 import ba.unsa.etf.http.HttpResponse;
 import ba.unsa.etf.http.HttpUtils;
 import ba.unsa.etf.models.Question;
 import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.control.*;
 import com.gluonhq.charm.glisten.control.Alert;
-import com.gluonhq.charm.glisten.control.BottomNavigationButton;
+import com.gluonhq.charm.glisten.control.Dialog;
 import com.gluonhq.charm.glisten.control.TextField;
-import javafx.beans.value.ChangeListener;
+import com.gluonhq.charm.glisten.mvc.View;
+import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import javax.json.JsonArray;
@@ -23,6 +28,13 @@ import java.io.IOException;
 import static ba.unsa.etf.GluonApplication.SIGNUP_SUCCESS_VIEW;
 
 public class SignupPresenter {
+
+    @FXML
+    private Button pickQuestion;
+
+    @FXML
+    private View signupView;
+
     @FXML
     private TextField firstName;
 
@@ -41,8 +53,8 @@ public class SignupPresenter {
     @FXML
     private PasswordField passwordConfirm;
 
-    @FXML
-    private ComboBox<Question> comboBox;
+//    @FXML
+//    private ComboBox<Question> comboBox;
 
     @FXML
     private TextField answer;
@@ -51,7 +63,7 @@ public class SignupPresenter {
     private Label firstNameValidator, lastNameValidator, emailValidator, usernameValidator, passwordValidator, confpassValidator, answerValidator;
 
     @FXML
-    private BottomNavigationButton signupBtn;
+    private Button signupBtn;
 
     private Question chosenQuestion;
 
@@ -59,13 +71,20 @@ public class SignupPresenter {
 
     @FXML
     public void initialize() {
+        signupView.showingProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                appBar.setTitleText("Create account");
+                appBar.setNavIcon(MaterialDesignIcon.ARROW_BACK.button(event -> GluonApplication.getInstance().switchToPreviousView()));
+            }
+        });
         JsonArray dbQuestions;
         try {
             HttpResponse httpResponse = HttpUtils.GET("questions", false);
             dbQuestions = httpResponse.getMessage();
             convertToObservableList(dbQuestions);
-            comboBox.getSelectionModel().selectedItemProperty()
-                    .addListener((ChangeListener<Question>) (observable, oldValue, newValue) -> chosenQuestion = newValue);
+//            comboBox.getSelectionModel().selectedItemProperty()
+//                    .addListener((ChangeListener<Question>) (observable, oldValue, newValue) -> chosenQuestion = newValue);
             validateFirstName();
             validateLastName();
             validateEmail();
@@ -77,24 +96,69 @@ public class SignupPresenter {
         }
     }
 
-    public void signup() {
-        HttpResponse httpResponse = null;
-        try {
-            httpResponse = HttpUtils.POST("api/auth/signup/" + chosenQuestion.getId(),
-                    "{\"firstName\":\"" + firstName.getText()
-                            + "\",\"lastName\":\"" + lastName.getText()
-                            + "\",\"email\":\"" + email.getText()
-                            + "\",\"username\":\"" + username.getText()
-                            + "\",\"password\":\"" + password.getText()
-                            + "\",\"answer\": {\"text\":\"" + answer.getText() + "\"}}", false);
-            if(httpResponse.getCode() == 200) {
-                MobileApplication.getInstance().switchView(SIGNUP_SUCCESS_VIEW);
-            } else {
-                Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
-                alert.showAndWait();
+    public void openDialog() {
+        Dialog dialog = new Dialog(false);
+    //    dialog.setTitleText("Pick sequrity question");
+        CharmListView<Question, Integer> charmListView = new CharmListView<>();
+        charmListView.setItems(sequrityQuestions);
+        charmListView.setPadding(new Insets(5,5,5,5));
+        charmListView.setCellFactory(new Callback<CharmListView<Question, Integer>, CharmListCell<Question>>() {
+            @Override
+            public CharmListCell<Question> call(CharmListView<Question, Integer> param) {
+                return new CharmListCell<Question>() {
+                    @Override
+                    public void updateItem(Question item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null && !empty) {
+                            Text text = new Text(item.toString());
+                            text.setFont(Font.font(12));
+                            text.setWrappingWidth(180);
+                            setGraphic(text);
+                        }
+                    }
+                };
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        });
+        charmListView.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            chosenQuestion = newValue;
+            pickQuestion.setText(newValue.getLabel());
+        });
+        dialog.setContent(charmListView);
+        Button okButton = new Button("OK");
+        okButton.setOnAction(e -> {
+            dialog.hide();
+        });
+        dialog.getButtons().add(okButton);
+        dialog.showAndWait();
+    }
+
+    public void signup() {
+        Alert alert;
+        if(!isUsernameAvailable(username.getText())) {
+            alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, "Username " + username.getText() + " is taken! Please enter different one.");
+            alert.showAndWait();
+        } else if(!isEmailAvailable(email.getText())) {
+            alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, "Email " + email.getText() + " is taken! Please enter different one.");
+            alert.showAndWait();
+        } else {
+            HttpResponse httpResponse = null;
+            try {
+                httpResponse = HttpUtils.POST("api/auth/signup/" + chosenQuestion.getId(),
+                        "{\"firstName\":\"" + firstName.getText()
+                                + "\",\"lastName\":\"" + lastName.getText()
+                                + "\",\"email\":\"" + email.getText()
+                                + "\",\"username\":\"" + username.getText()
+                                + "\",\"password\":\"" + password.getText()
+                                + "\",\"answer\": {\"text\":\"" + answer.getText() + "\"}}", false);
+                if (httpResponse.getCode() == 200) {
+                    MobileApplication.getInstance().switchView(SIGNUP_SUCCESS_VIEW);
+                } else {
+                    alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
+                    alert.showAndWait();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -102,7 +166,7 @@ public class SignupPresenter {
         for(int i = 0; i < dbQuestions.size(); i++) {
             JsonObject question = dbQuestions.getJsonObject(i);
             sequrityQuestions.add(new Question(question.getInt("id"), question.getString("title")));
-            comboBox.setItems(sequrityQuestions);
+            //comboBox.setItems(sequrityQuestions);
         }
     }
 
@@ -133,7 +197,7 @@ public class SignupPresenter {
                 firstNameValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else if (newValue.length() < 2 || newValue.length() > 40) {
-                firstNameValidator.setText("First name should contain between \n 2 and 40 characters.");
+                firstNameValidator.setText("First name should contain between 2 and 40 characters.");
                 firstNameValidator.setVisible(true);
                 signupBtn.setDisable(true);
             }else {
@@ -152,7 +216,7 @@ public class SignupPresenter {
                 lastNameValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else if (newValue.length() < 2 || newValue.length() > 40) {
-                lastNameValidator.setText("Last name should contain between \n 2 and 40 characters.");
+                lastNameValidator.setText("Last name should contain between 2 and 40 characters.");
                 lastNameValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
@@ -183,10 +247,8 @@ public class SignupPresenter {
         });
 
         email.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println(observable);
-            System.out.println("promijenio se!!");
             if (!newValue && !isEmailAvailable(email.getText())) {
-                emailValidator.setText("This email address is taken!");
+                emailValidator.setText("Email address " + email.getText() + " is taken!");
                 emailValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
@@ -200,7 +262,7 @@ public class SignupPresenter {
     public void validateUsername() {
         username.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue && !isUsernameAvailable(username.getText())) {
-                usernameValidator.setText("Ovo korisničko ime je zauzeto!");
+                usernameValidator.setText("Username " + username.getText() + " is taken!");
                 usernameValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
@@ -214,11 +276,11 @@ public class SignupPresenter {
     public void validatePasswords() {
         password.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() == 0) {
-                passwordValidator.setText("Molimo unesite lozinku!");
+                passwordValidator.setText("Enter password please!");
                 passwordValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else if(passwordConfirm.getText().length() != 0 && !newValue.equals(passwordConfirm.getText())) {
-                confpassValidator.setText("Lozinke se ne poklapaju!");
+                confpassValidator.setText("Passwords don't match!");
                 confpassValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
@@ -230,7 +292,7 @@ public class SignupPresenter {
 
         passwordConfirm.textProperty().addListener((observable, oldValue, newValue) -> {
             if(!newValue.equals(password.getText())) {
-                confpassValidator.setText("Lozinke se ne poklapaju!");
+                confpassValidator.setText("Passwords don't match!");
                 confpassValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
@@ -244,7 +306,7 @@ public class SignupPresenter {
     public void validateAnswer() {
         answer.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() == 0) {
-                answerValidator.setText("Molimo unesite odgovor na pitanje!");
+                answerValidator.setText("Enter answer for chosen sequrity question!");
                 answerValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
@@ -255,5 +317,4 @@ public class SignupPresenter {
         });
     }
 
-    // MobileApplication.getInstance().switchView("MainView")
 }

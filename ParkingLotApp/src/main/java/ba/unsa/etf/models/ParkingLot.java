@@ -1,47 +1,54 @@
 package ba.unsa.etf.models;
 
 public class ParkingLot {
-    private String code;
-    private String address;
-    private int freeSpots;
+    private Long id;
+    private String zoneCode;
+    private String streetAddress;
+    private String municipality;
     private double costPerHour;
-    private double maxStopTime;
+    private String workDays;
+    private String workTime;
 
-    public ParkingLot(String code, int freeSpots) {
-        this.code = code;
-        this.freeSpots = freeSpots;
-    }
-
-    public ParkingLot(String code, String address, int freeSpots, double costPerHour, double maxStopTime) {
-        this.code = code;
-        this.address = address;
-        this.freeSpots = freeSpots;
+    public ParkingLot(Long id, String zoneCode, String streetAddress, String municipality, double costPerHour, String workDays, String workTime) {
+        this.id = id;
+        this.zoneCode = zoneCode;
+        this.streetAddress = streetAddress;
+        this.municipality = municipality;
         this.costPerHour = costPerHour;
-        this.maxStopTime = maxStopTime;
+        this.workDays = workDays;
+        this.workTime = workTime;
     }
 
-    public String getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getZoneCode() {
+        return zoneCode;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setZoneCode(String zoneCode) {
+        this.zoneCode = zoneCode;
     }
 
-    public int getFreeSpots() {
-        return freeSpots;
+    public String getStreetAddress() {
+        return streetAddress;
     }
 
-    public void setFreeSpots(int freeSpots) {
-        this.freeSpots = freeSpots;
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
 
     public double getCostPerHour() {
@@ -52,16 +59,19 @@ public class ParkingLot {
         this.costPerHour = costPerHour;
     }
 
-    public double getMaxStopTime() {
-        return maxStopTime;
+    public String getWorkDays() {
+        return workDays;
     }
 
-    public void setMaxStopTime(double maxStopTime) {
-        this.maxStopTime = maxStopTime;
+    public void setWorkDays(String workDays) {
+        this.workDays = workDays;
     }
 
-    @Override
-    public String toString() {
-        return code;
+    public String getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(String workTime) {
+        this.workTime = workTime;
     }
 }
