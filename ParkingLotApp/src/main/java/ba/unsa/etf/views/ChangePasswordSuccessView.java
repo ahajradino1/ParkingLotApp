@@ -5,11 +5,10 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
-public class SignupSuccessView {
-
+public class ChangePasswordSuccessView {
     public View getView() {
         try {
-            return FXMLLoader.load(LoginView.class.getResource("signup_success.fxml"));
+            return FXMLLoader.load(LoginView.class.getResource("change_password_success.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();

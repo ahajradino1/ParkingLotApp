@@ -6,12 +6,10 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 
-public class AccountView {
+public class ChangePasswordView {
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("account.fxml"));
-            view.setBottom(GluonApplication.bottomNavigation);
-            return view;
+            return FXMLLoader.load(LoginView.class.getResource("change_password.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();

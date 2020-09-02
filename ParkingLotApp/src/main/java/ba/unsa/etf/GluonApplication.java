@@ -22,7 +22,7 @@ public class GluonApplication extends MobileApplication {
     public static final String SIGNUP_SUCCESS_VIEW = "Signup Success View";
     public static final String HOMEPAGE_VIEW = "Home Page View";
     public static final String TICKETS_VIEW = "Tickets View";
-    public static final String ACCOUNT_VIEW = "Account View";
+    public static final String CHANGE_PASSWORD_VIEW = "Change Password View";
     public static final String BANK_ACCOUNTS_VIEW = "Bank Accounts View";
     public static final String REGISTRATION_PLATES_VIEW = "Registration Plates View";
     public static final String LOGOUT_VIEW = "Logout view";
@@ -31,8 +31,7 @@ public class GluonApplication extends MobileApplication {
     public static final String ADD_REG_PLATE_VIEW = "Add Registration Plate View";
     public static final String ADD_REG_PLATE_SUCCESS_VIEW = "Successfully Added Registration Plate View";
     public static final String PAYMENT_SUCCESS_VIEW = "Successful Payment View";
-    public static final String ALL_TICKETS_VIEW = "All Tickets View";
-    public static final String ACTIVE_TICKETS_VIEW = "Active Tickets View";
+    public static final String CHANGE_PASSWORD_SUCCESS_VIEW = "Successfully Changed Password View";
 
     public static NavigationDrawer menu = new NavigationDrawer();
     public static BottomNavigation bottomNavigation = new BottomNavigation();
@@ -45,7 +44,7 @@ public class GluonApplication extends MobileApplication {
         addViewFactory(SIGNUP_SUCCESS_VIEW, () -> new SignupSuccessView().getView());
         addViewFactory(HOMEPAGE_VIEW, () -> new HomeView().getView());
         addViewFactory(TICKETS_VIEW, () -> new TicketsView().getView());
-        addViewFactory(ACCOUNT_VIEW, () -> new AccountView().getView());
+        addViewFactory(CHANGE_PASSWORD_VIEW, () -> new ChangePasswordView().getView());
         addViewFactory(BANK_ACCOUNTS_VIEW, () -> new BankAccountsView().getView());
         addViewFactory(REGISTRATION_PLATES_VIEW, () -> new RegistrationPlateView().getView());
         addViewFactory(LOGOUT_VIEW, () -> new LogoutView().getView());
@@ -54,6 +53,7 @@ public class GluonApplication extends MobileApplication {
         addViewFactory(ADD_REG_PLATE_VIEW, () -> new AddRegistrationPlateView().getView());
         addViewFactory(ADD_REG_PLATE_SUCCESS_VIEW, () -> new AddRegPlateSuccessView().getView());
         addViewFactory(PAYMENT_SUCCESS_VIEW, () -> new PaymentSuccessView().getView());
+        addViewFactory(CHANGE_PASSWORD_SUCCESS_VIEW, () -> new ChangePasswordSuccessView().getView());
 
         //addViewFactory(PRIMARY_VIEW, () -> new PrimaryView().getView());
         //addViewFactory(SECONDARY_VIEW, () -> new SecondaryView().getView());
@@ -78,7 +78,7 @@ public class GluonApplication extends MobileApplication {
         //todo osmisliti sta ce sve biti u ovom meniju -  za sad su one defaultne 3 opcije
         final NavigationDrawer.Item homeItem = new NavigationDrawer.ViewItem("Home", MaterialDesignIcon.HOME.graphic(), HOMEPAGE_VIEW);
         final NavigationDrawer.Item receiptsItem = new NavigationDrawer.ViewItem("Tickets", MaterialDesignIcon.RECEIPT.graphic(), TICKETS_VIEW);
-        final NavigationDrawer.Item accountItem = new NavigationDrawer.ViewItem("Account", MaterialDesignIcon.PERSON.graphic(), ACCOUNT_VIEW);
+        final NavigationDrawer.Item accountItem = new NavigationDrawer.ViewItem("Change password", MaterialDesignIcon.VPN_KEY.graphic(), CHANGE_PASSWORD_VIEW);
         final NavigationDrawer.Item bankAccountsItem = new NavigationDrawer.ViewItem("Bank accounts", MaterialDesignIcon.CREDIT_CARD.graphic(), BANK_ACCOUNTS_VIEW);
         final NavigationDrawer.Item registrationPlatesItem = new NavigationDrawer.ViewItem("Registration plates", MaterialDesignIcon.DIRECTIONS_CAR.graphic(), REGISTRATION_PLATES_VIEW);
         final NavigationDrawer.Item logoutItem = new NavigationDrawer.ViewItem("Logout", MaterialDesignIcon.EXIT_TO_APP.graphic(), LOGOUT_VIEW);
