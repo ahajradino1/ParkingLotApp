@@ -1,18 +1,19 @@
 package ba.unsa.etf;
 
+import ba.unsa.etf.presenters.LoginPresenter;
 import ba.unsa.etf.views.*;
 import com.gluonhq.charm.down.Platform;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.LifecycleService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
-import com.gluonhq.charm.glisten.control.Avatar;
-import com.gluonhq.charm.glisten.control.BottomNavigation;
-import com.gluonhq.charm.glisten.control.BottomNavigationButton;
-import com.gluonhq.charm.glisten.control.NavigationDrawer;
+import com.gluonhq.charm.glisten.control.*;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 
 public class GluonApplication extends MobileApplication {
     public static final String PRIMARY_VIEW = "Primary Vire";
@@ -54,9 +55,6 @@ public class GluonApplication extends MobileApplication {
         addViewFactory(ADD_REG_PLATE_SUCCESS_VIEW, () -> new AddRegPlateSuccessView().getView());
         addViewFactory(PAYMENT_SUCCESS_VIEW, () -> new PaymentSuccessView().getView());
         addViewFactory(CHANGE_PASSWORD_SUCCESS_VIEW, () -> new ChangePasswordSuccessView().getView());
-
-        //addViewFactory(PRIMARY_VIEW, () -> new PrimaryView().getView());
-        //addViewFactory(SECONDARY_VIEW, () -> new SecondaryView().getView());
     }
 
     @Override
@@ -82,8 +80,13 @@ public class GluonApplication extends MobileApplication {
         final NavigationDrawer.Item bankAccountsItem = new NavigationDrawer.ViewItem("Bank accounts", MaterialDesignIcon.CREDIT_CARD.graphic(), BANK_ACCOUNTS_VIEW);
         final NavigationDrawer.Item registrationPlatesItem = new NavigationDrawer.ViewItem("Registration plates", MaterialDesignIcon.DIRECTIONS_CAR.graphic(), REGISTRATION_PLATES_VIEW);
         final NavigationDrawer.Item logoutItem = new NavigationDrawer.ViewItem("Logout", MaterialDesignIcon.EXIT_TO_APP.graphic(), LOGOUT_VIEW);
-        //final NavigationDrawer.Item primaryItem = new NavigationDrawer.ViewItem("Primary", MaterialDesignIcon.HOME.graphic(), PRIMARY_VIEW, ViewStackPolicy.SKIP);
-        //final NavigationDrawer.Item secondaryItem = new NavigationDrawer.ViewItem("Secondary", MaterialDesignIcon.DASHBOARD.graphic(), SECONDARY_VIEW);
+        logoutItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                LoginPresenter.TOKEN = null;
+                MobileApplication.getInstance().switchView(LOGIN_VIEW);
+            }
+        });
         menu.getItems().addAll(homeItem, accountItem, receiptsItem, bankAccountsItem, registrationPlatesItem, logoutItem);
 
         //todo ovo na kraju treba da obrisem jer app nije predvidjena za desktop
