@@ -69,7 +69,7 @@ public class AddBankAccountPresenter {
             if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.ARROW_BACK.button(event -> GluonApplication.getInstance().switchToPreviousView()));
-              //  appBar.setTitleText("Bank accounts");
+                appBar.setTitleText("Add bank account");
             }
         });
         getUserDetails();

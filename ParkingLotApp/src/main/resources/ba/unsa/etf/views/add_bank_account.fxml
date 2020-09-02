@@ -14,12 +14,14 @@
 
 <View fx:id="addBankAccView" onShown="#onShown" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.AddBankAccountPresenter">
    <center>
-       <VBox alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="344.0" prefWidth="236.0" spacing="5.0" style="-fx-background-color: #f0ad4e;" BorderPane.alignment="CENTER">
+       <VBox alignment="CENTER" prefHeight="344.0" prefWidth="236.0" spacing="5.0" BorderPane.alignment="CENTER">
            <children>
+            <Label opacity="0.5" text="Account owner:" />
                <TextField fx:id="accountOwner">
                    <VBox.margin>
                        <Insets bottom="15.0" />
                    </VBox.margin></TextField>
+            <Label opacity="0.5" text="Credit card number:" />
                <TextField fx:id="creditCardNumber" promptText="Credit card number">
                    <VBox.margin>
                        <Insets />
@@ -29,6 +31,7 @@
                        <Font size="10.0" />
                    </font>
                </Label>
+            <Label opacity="0.5" text="CVC:" />
                <TextField fx:id="cvc" promptText="CVC">
                    <VBox.margin>
                        <Insets />
@@ -38,7 +41,7 @@
                        <Font size="10.0" />
                    </font>
                </Label>
-               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your bank:" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="162.3470458984375">
+               <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose your bank:" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="162.3470458984375">
                    <VBox.margin>
                        <Insets />
                    </VBox.margin>
@@ -47,8 +50,8 @@
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin></ComboBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pick expiry date:" />
-           <Button fx:id="openDialogBtn" alignment="CENTER" onAction="#openDialog" style="-fx-background-color: #f0ad4e;">
+            <Text opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Pick expiry date:" />
+           <Button fx:id="openDialogBtn" alignment="CENTER" onAction="#openDialog">
                <graphic>
                   <Icon content="PERM_CONTACT_CALENDAR" />
                </graphic>
@@ -58,9 +61,16 @@
                    <Font size="10.0" />
                </font>
            </Label>
-           </children></VBox>
+            <Button fx:id="addAccBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#addBankAccount" prefHeight="36.0" prefWidth="139.0" text="ADD ACCOUNT">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+           </children>
+         <padding>
+            <Insets left="50.0" right="50.0" />
+         </padding></VBox>
    </center>
-   <bottom>
-      <Button fx:id="addAccBtn" disable="true" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addBankAccount" text="Add account" textAlignment="CENTER" BorderPane.alignment="CENTER" />
-   </bottom>
+<!--   <bottom>-->
+<!--      <Button fx:id="addAccBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#addBankAccount" text="Add account" textAlignment="CENTER" BorderPane.alignment="CENTER" />-->
+<!--   </bottom>-->
 </View>
