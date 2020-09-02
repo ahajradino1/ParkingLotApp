@@ -49,7 +49,7 @@ public class AddRegistrationPlatePresenter {
         try {
             httpResponse = HttpUtils.POST("api/plates/add",
                     "{\"registrationNumber\":\"" + registrationNumber.getText() + "\"}", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 MobileApplication.getInstance().switchView(ADD_REG_PLATE_SUCCESS_VIEW);
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));

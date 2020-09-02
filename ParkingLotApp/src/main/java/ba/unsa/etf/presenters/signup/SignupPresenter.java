@@ -150,7 +150,7 @@ public class SignupPresenter {
                                 + "\",\"username\":\"" + username.getText()
                                 + "\",\"password\":\"" + password.getText()
                                 + "\",\"answer\": {\"text\":\"" + answer.getText() + "\"}}", false);
-                if (httpResponse.getCode() == 200) {
+                if (httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                     MobileApplication.getInstance().switchView(SIGNUP_SUCCESS_VIEW);
                 } else {
                     alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));

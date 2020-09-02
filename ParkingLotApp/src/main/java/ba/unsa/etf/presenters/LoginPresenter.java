@@ -50,7 +50,7 @@ public class LoginPresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.POST("api/auth/signin", "{\"usernameOrEmail\":\"" + username.getText()+ "\",\"password\":\"" + password.getText() +"\"}", false);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 TOKEN = httpResponse.getMessage().getJsonObject(0).getString("accessToken");
                  MobileApplication.getInstance().switchView(HOMEPAGE_VIEW);
 

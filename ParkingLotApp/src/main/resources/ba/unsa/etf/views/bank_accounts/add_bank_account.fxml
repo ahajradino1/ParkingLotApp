@@ -46,7 +46,7 @@
                        <Insets />
                    </VBox.margin>
                </Text>
-               <ComboBox fx:id="comboBoxBanks" prefWidth="150.0" visibleRowCount="3">
+               <ComboBox fx:id="comboBoxBanks" prefHeight="40.0" prefWidth="150.0" visibleRowCount="3">
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin></ComboBox>

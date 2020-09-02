@@ -61,7 +61,7 @@ public class HttpUtils {
         StringBuilder response = new StringBuilder();
         int statusCode = connection.getResponseCode();
         try(BufferedReader br = new BufferedReader(
-            new InputStreamReader(statusCode == 200 ? connection.getInputStream() : connection.getErrorStream(), "utf-8"))) {
+            new InputStreamReader(statusCode == 200 || statusCode == 201 ? connection.getInputStream() : connection.getErrorStream(), "utf-8"))) {
             String responseLine = null;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());

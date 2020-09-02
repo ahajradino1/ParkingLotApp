@@ -36,7 +36,7 @@ public class PasswordRecoveryPresenter {
         try {
             httpResponse = HttpUtils.POST("api/recover/securityquestion",
                     "{\"usernameOrEmail\":\"" + usernameOrEmail.getText() + "\"}", false);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 progressBar.progressProperty().set(0.66);
                 Label label = new Label("Answer your security question: " + httpResponse.getMessage().getJsonObject(0).getString("title"));
                 label.setWrapText(true);
@@ -64,7 +64,7 @@ public class PasswordRecoveryPresenter {
         try {
             httpResponse = HttpUtils.POST("api/recover/newPassword",
                     "{\"usernameOrEmail\":\"" + usernameOrEmail + "\",\"answer\":\"" + answer + "\"}", false);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 if(httpResponse.getMessage().getJsonObject(0).getBoolean("success")) {
                     progressBar.progressProperty().set(1.0);
                     Label success = new Label("Your new password is: " + httpResponse.getMessage().getJsonObject(0).getString("password"));

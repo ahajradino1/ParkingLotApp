@@ -23,6 +23,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.util.Callback;
@@ -65,6 +66,7 @@ public class HomePresenter {
             if(newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> GluonApplication.menu.open()));
+                appBar.setTitleText("Reserve parking spot");
             }
         });
     }
@@ -93,7 +95,7 @@ public class HomePresenter {
                             super.updateItem(item, empty);
                             if(item != null && !empty) {
                                 ListTile tile = new ListTile();
-                                ImageView imageView = new ImageView(new File("src/main/resources/ba/unsa/etf/images/parking-icon.png").toURI().toString());
+                                ImageView imageView = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/parking-icon.png")));
                                 imageView.setFitHeight(20.0);
                                 imageView.setFitWidth(20.0);
                                 tile.setPrimaryGraphic(imageView);
@@ -109,9 +111,7 @@ public class HomePresenter {
             scrollPane.setContent(charmListView);
 
         } else {
-            ImageView noData = new ImageView(new File("src/main/resources/ba/unsa/etf/images/no_data.png").toURI().toString());
-            noData.setFitWidth(100);
-            noData.setFitWidth(100);
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
             scrollPane.setContent(noData);
         }
     }
@@ -137,7 +137,7 @@ public class HomePresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.GET("parkinglots/all", false);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 JsonArray dbParkingLots = httpResponse.getMessage();
                 for(int i = 0; i < dbParkingLots.size(); i++) {
                     JsonObject parkingLot = dbParkingLots.getJsonObject(i);
@@ -168,21 +168,6 @@ public class HomePresenter {
             });
             dialog.getButtons().addAll(payButton);
 
-//            dialog.setOnCloseRequest(closeRequestEvent -> {
-//                Dialog areYouSureDialog = new Dialog(false);
-//                areYouSureDialog.setContent(new Label("Are you sure you want to discard all changes?"));
-//                Button yesButton = new Button("DISCARD");
-//                Button noButton = new Button("KEEP EDITING");
-//                yesButton.setOnAction(event2 -> {
-//                    areYouSureDialog.hide();
-//                });
-//                noButton.setOnAction(event2 -> {
-//                    closeRequestEvent.consume();
-//                    areYouSureDialog.hide();
-//                });
-//                areYouSureDialog.getButtons().addAll(yesButton, noButton);
-//                areYouSureDialog.showAndWait();
-//            });
             dialog.showAndWait();
         });
     }
@@ -202,7 +187,7 @@ public class HomePresenter {
                             + "\",\"startingTime\":\"" + startingTime
                             + "\",\"endingTime\":\"" + endingTime
                             + "\",\"price\":\"" + price + "\"}", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 MobileApplication.getInstance().switchView(PAYMENT_SUCCESS_VIEW);
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
@@ -293,6 +278,7 @@ public class HomePresenter {
             comboBox.setVisibleRowCount(3);
             comboBox.setItems(bankAccounts);
             comboBox.setStyle("-fx-background-color: bisque");
+            comboBox.setPrefHeight(40);
             comboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BankAccount>() {
                 @Override
                 public void changed(ObservableValue<? extends BankAccount> observable, BankAccount oldValue, BankAccount newValue) {
@@ -306,7 +292,7 @@ public class HomePresenter {
             Icon icon = new Icon(MaterialDesignIcon.ERROR);
             Button addRegPlate = new Button("Add registration plate");
             addRegPlate.setOnAction(e -> MobileApplication.getInstance().switchView(ADD_REG_PLATE_VIEW));
-            VBox addPlateContainer = new VBox(new Label("No bank accounts added."), addRegPlate);
+            VBox addPlateContainer = new VBox(new Label("No registration plates added."), addRegPlate);
             addPlateContainer.setAlignment(Pos.CENTER);
             addPlateContainer.setSpacing(10);
             HBox noPlate = new HBox(icon, addPlateContainer);
@@ -319,6 +305,7 @@ public class HomePresenter {
             comboBox.setVisibleRowCount(3);
             comboBox.setItems(registrationPlates);
             comboBox.setStyle("-fx-background-color: bisque");
+            comboBox.setPrefHeight(40);
             comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> chosenRegistrationPlate = newValue);
             pickRegistrationPlate = comboBox;
         }
@@ -380,7 +367,7 @@ public class HomePresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.GET("api/accounts/all", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 JsonArray dbBankAccounts = httpResponse.getMessage();
                 for(int i = 0; i < dbBankAccounts.size(); i++) {
                     JsonObject bankAccount = dbBankAccounts.getJsonObject(i);
@@ -400,7 +387,7 @@ public class HomePresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.GET("api/plates/all", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 JsonArray dbRegPlates = httpResponse.getMessage();
                 for(int i = 0; i < dbRegPlates.size(); i++) {
                     JsonObject regPlate = dbRegPlates.getJsonObject(i);

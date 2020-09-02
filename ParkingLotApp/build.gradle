@@ -33,6 +33,13 @@ jfxmobile {
     android {
         manifest = 'src/android/AndroidManifest.xml'
         androidSdk = 'C:/Users/HP/AppData/Local/Android/Sdk'
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/LICENSE.txt'
+        }
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')

@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.ScrollPane;
@@ -109,7 +110,7 @@ public class BankAccountsPresenter {
             }
             scrollView.setContent(accountsContainer);
         } else {
-            ImageView noData = new ImageView(new File("src/main/resources/ba/unsa/etf/images/no_data.png").toURI().toString());
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
             noData.setFitWidth(100);
             noData.setFitWidth(100);
             scrollView.setContent(noData);
@@ -121,7 +122,7 @@ public class BankAccountsPresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.GET("api/accounts/all", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 JsonArray dbBankAccounts = httpResponse.getMessage();
                 for(int i = 0; i < dbBankAccounts.size(); i++) {
                     JsonObject bankAccount = dbBankAccounts.getJsonObject(i);
@@ -146,7 +147,7 @@ public class BankAccountsPresenter {
         try {
             httpResponse = HttpUtils.DELETE("api/accounts/delete/" + accountId, true);
             Alert alert = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION, httpResponse.getMessage().getJsonObject(0).getString("text"));
-            if (httpResponse.getCode() != 200)
+            if (httpResponse.getCode() != 200 || httpResponse.getCode() == 201)
                 alert.setAlertType(javafx.scene.control.Alert.AlertType.ERROR);
             alert.showAndWait();
         } catch (IOException e) {

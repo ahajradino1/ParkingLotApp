@@ -24,7 +24,7 @@
                         <Font size="10.0" />
                     </font>
                 </Label>
-            <Label text="Registration plate format is: X00-X-000 for regular cars, TA-000000 for taxi cars and TT-000000 for cars with test tables. " textAlignment="CENTER" textFill="#f59740" wrapText="true">
+            <Label text="Registration plate format is: X00-X-000 for regular cars, TA-000000 for taxi cars and TT-000000 for cars with test plates. " textAlignment="CENTER" textFill="#f59740" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

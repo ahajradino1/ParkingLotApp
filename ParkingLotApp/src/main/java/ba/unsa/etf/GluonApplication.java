@@ -22,6 +22,7 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 
@@ -75,13 +76,13 @@ public class GluonApplication extends MobileApplication {
         scene.getStylesheets().add(GluonApplication.class.getResource("style.css").toExternalForm());
         createDrawer();
         createBottomNavigation();
+        this.getStatusBar().setColor(Color.BLACK);
     }
-
 
     public static void createDrawer() {
         NavigationDrawer.Header header = new NavigationDrawer.Header("Parking Lot",
                 "Sarajevo",
-                new Avatar(21, new Image(new File("src/main/resources/ba/unsa/etf/images/icon2.png").toURI().toString())));
+                new Avatar(21, new Image(GluonApplication.class.getResourceAsStream("images/icon2.png"))));
 
         menu.setHeader(header);
 

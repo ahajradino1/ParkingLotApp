@@ -65,7 +65,7 @@ public class ChangePasswordPresenter {
                             + "\",\"newPassword\":\"" + newPassword.getText()
                             + "\",\"answer\":\"" + answer.getText()
                             + "\"}", true);
-            if (httpResponse.getCode() == 200) {
+            if (httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 MobileApplication.getInstance().switchView(CHANGE_PASSWORD_SUCCESS_VIEW);
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
@@ -81,7 +81,7 @@ public class ChangePasswordPresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.POST("api/change/securityquestion", "{}", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 System.out.println(httpResponse.getMessage());
                securityQuestion.setText("Answer security question: " + httpResponse.getMessage().getJsonObject(0).getString("title"));
             } else {

@@ -26,6 +26,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -80,9 +81,7 @@ public class TicketsPresenter {
             charmListView.setItems(activeTickets);
             customizeListItem(all);
         } else {
-            ImageView noData = new ImageView(new File("src/main/resources/ba/unsa/etf/images/no_data.png").toURI().toString());
-            noData.setFitWidth(100);
-            noData.setFitWidth(100);
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
             tickets.setCenter(noData);
         }
     }
@@ -97,12 +96,12 @@ public class TicketsPresenter {
                         super.updateItem(item, empty);
                         if(item != null && !empty) {
                             ListTile tile = new ListTile();
-                            File imgFile;
+                            Image imgFile;
                             if(all) {
-                                imgFile = new File("src/main/resources/ba/unsa/etf/images/ticket.png");
+                                imgFile = new Image(GluonApplication.class.getResourceAsStream("images/ticket.png"));
                             } else
-                                imgFile = new File("src/main/resources/ba/unsa/etf/images/active-ticket.png");
-                            ImageView imageView = new ImageView(imgFile.toURI().toString());
+                                imgFile = new Image(GluonApplication.class.getResourceAsStream("images/active-ticket.png"));
+                            ImageView imageView = new ImageView(imgFile);
                             imageView.setFitHeight(20.0);
                             imageView.setFitWidth(20.0);
                             tile.setPrimaryGraphic(imageView);
@@ -188,7 +187,7 @@ public class TicketsPresenter {
     }
 
     private void getTickets(HttpResponse httpResponse, ObservableList<Ticket> activeTickets) throws ParseException {
-        if(httpResponse.getCode() == 200) {
+        if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
             JsonArray dbTickets = httpResponse.getMessage();
             for(int i = 0; i < dbTickets.size(); i++) {
                 JsonObject ticket = dbTickets.getJsonObject(i);

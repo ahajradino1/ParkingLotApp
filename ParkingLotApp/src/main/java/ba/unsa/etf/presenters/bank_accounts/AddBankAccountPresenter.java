@@ -96,7 +96,7 @@ public class AddBankAccountPresenter {
                             + "\",\"expiryDate\":\"" + openDialogBtn.getText()
                             + "\",\"bankName\":\"" + chosenBank.getBankName()
                             + "\"}", true);
-            if(httpResponse.getCode() == 200) {
+            if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 MobileApplication.getInstance().switchView(ADD_BANK_ACC_SUCCESS_VIEW);
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
@@ -122,7 +122,7 @@ public class AddBankAccountPresenter {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        if (httpResponse != null && httpResponse.getCode() == 200) {
+        if (httpResponse != null && httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
             JsonObject userDetails = httpResponse.getMessage().getJsonObject(0);
             currentUser = new User((long) userDetails.getInt("id"),
                     userDetails.getString("username"),
