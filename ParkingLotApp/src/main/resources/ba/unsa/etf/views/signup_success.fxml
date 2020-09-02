@@ -18,9 +18,9 @@
                     <Image url="@../images/success_icon.png" />
                 </image>
             </ImageView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uspješno ste kreirali korisnički račun." />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kliknite na dugme ispod da se prijavite."/>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToLogin" prefHeight="65.0" prefWidth="121.0" text="PRIJAVI SE">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully created user account." />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click on the button below to sign in."/>
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToLogin" prefHeight="65.0" prefWidth="121.0" text="SIGN IN">
                <font>
                   <Font size="20.0" />
                </font>
