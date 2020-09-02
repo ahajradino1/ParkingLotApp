@@ -39,6 +39,7 @@ public class AddRegistrationPlatePresenter {
             if (newValue) {
                 AppBar appBar = MobileApplication.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.ARROW_BACK.button(event -> GluonApplication.getInstance().switchToPreviousView()));
+                appBar.setTitleText("Add registration plate");
             }
         });
     }
@@ -65,11 +66,11 @@ public class AddRegistrationPlatePresenter {
                 regNumberValidator.setText("This field is required!");
                 regNumberValidator.setVisible(true);
                 addPlateBtn.setDisable(true);
-            } else if (newValue.length() != 9 && (!isRegularPlate(newValue) || !isTaxiPlate(newValue) || !isTestPlate(newValue))) {
+            } else if (!isRegularPlate(newValue) && !isTaxiPlate(newValue) && !isTestPlate(newValue)) {
                 regNumberValidator.setText("Registration number does not match template.");
                 regNumberValidator.setVisible(true);
                 addPlateBtn.setDisable(true);
-            } else {
+            } else if (isRegularPlate(newValue) || isTaxiPlate(newValue) || isTestPlate(newValue)) {
                 regNumberValidator.setVisible(false);
                 addPlateBtn.setDisable(false);
             }

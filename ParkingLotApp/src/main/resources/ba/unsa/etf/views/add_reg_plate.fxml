@@ -5,16 +5,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <View fx:id="addRegPlateView" onShown="#validateRegNumber" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.AddRegistrationPlatePresenter">
     <center>
-        <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="344.0" prefWidth="236.0" spacing="5.0" style="-fx-background-color: #f0ad4e;" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="344.0" prefWidth="236.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
+            <Label opacity="0.5" text="Enter registration plate number:" textAlignment="CENTER" />
                 <TextField fx:id="registrationNumber" promptText="Registration number">
                     <VBox.margin>
                         <Insets />
@@ -25,16 +24,23 @@
                         <Font size="10.0" />
                     </font>
                 </Label>
-            <Label text="Click for more details." underline="true">
-               <tooltip>
-                  <Tooltip contentDisplay="CENTER" text="Registration plate format is:X00-X-000 for regular cars,TA-000000 for taxi cars andTT-000000 for cars with test tables." />
-               </tooltip>
+            <Label text="Registration plate format is: X00-X-000 for regular cars, TA-000000 for taxi cars and TT-000000 for cars with test tables. " textAlignment="CENTER" textFill="#f59740" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
             </Label>
-            <TextArea prefHeight="129.0" prefWidth="200.0" text="Registration plate format is:&#10;X00-X-000 for regular cars,&#10;TA-000000 for taxi cars and&#10;TT-000000 for cars with test&#10;tables.&#10;&#10;" />
-            </children></VBox>
+              <Button fx:id="addPlateBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#addRegistrationPlate" prefHeight="39.0" prefWidth="177.0" text="Add registration plate" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
+            </children>
+         <padding>
+            <Insets left="40.0" right="40.0" top="40.0" />
+         </padding></VBox>
     </center>
-    <bottom>
-        <Button fx:id="addPlateBtn" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#addRegistrationPlate" text="Add registration plates" textAlignment="CENTER" BorderPane.alignment="CENTER" />
-    </bottom>
 
 </View>
