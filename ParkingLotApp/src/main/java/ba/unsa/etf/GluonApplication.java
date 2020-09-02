@@ -2,6 +2,16 @@ package ba.unsa.etf;
 
 import ba.unsa.etf.presenters.LoginPresenter;
 import ba.unsa.etf.views.*;
+import ba.unsa.etf.views.bank_accounts.AddBankAccSuccessView;
+import ba.unsa.etf.views.bank_accounts.AddBankAccountView;
+import ba.unsa.etf.views.bank_accounts.BankAccountsView;
+import ba.unsa.etf.views.change_password.ChangePasswordSuccessView;
+import ba.unsa.etf.views.change_password.ChangePasswordView;
+import ba.unsa.etf.views.registration_plates.AddRegPlateSuccessView;
+import ba.unsa.etf.views.registration_plates.AddRegistrationPlateView;
+import ba.unsa.etf.views.registration_plates.RegistrationPlateView;
+import ba.unsa.etf.views.signup.SignupSuccessView;
+import ba.unsa.etf.views.signup.SignupView;
 import com.gluonhq.charm.down.Platform;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.LifecycleService;
@@ -9,11 +19,11 @@ import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.*;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.ImageView;
+
+import java.io.File;
 
 public class GluonApplication extends MobileApplication {
     public static final String PRIMARY_VIEW = "Primary Vire";
@@ -70,7 +80,8 @@ public class GluonApplication extends MobileApplication {
         //todo promijeniti ikonu - neka bude ista kao za app
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
                 "Multi View Project",
-                new Avatar(21, new Image(DrawerManager.class.getResourceAsStream("/icon.png"))));
+                new Avatar(21, new Image(new File("src/main/resources/ba/unsa/etf/images/icon.png").toURI().toString())));
+
         menu.setHeader(header);
 
         //todo osmisliti sta ce sve biti u ovom meniju -  za sad su one defaultne 3 opcije
@@ -80,12 +91,9 @@ public class GluonApplication extends MobileApplication {
         final NavigationDrawer.Item bankAccountsItem = new NavigationDrawer.ViewItem("Bank accounts", MaterialDesignIcon.CREDIT_CARD.graphic(), BANK_ACCOUNTS_VIEW);
         final NavigationDrawer.Item registrationPlatesItem = new NavigationDrawer.ViewItem("Registration plates", MaterialDesignIcon.DIRECTIONS_CAR.graphic(), REGISTRATION_PLATES_VIEW);
         final NavigationDrawer.Item logoutItem = new NavigationDrawer.ViewItem("Logout", MaterialDesignIcon.EXIT_TO_APP.graphic(), LOGOUT_VIEW);
-        logoutItem.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                LoginPresenter.TOKEN = null;
-                MobileApplication.getInstance().switchView(LOGIN_VIEW);
-            }
+        logoutItem.setOnMouseClicked(event -> {
+            LoginPresenter.TOKEN = null;
+            MobileApplication.getInstance().switchView(LOGIN_VIEW);
         });
         menu.getItems().addAll(homeItem, accountItem, receiptsItem, bankAccountsItem, registrationPlatesItem, logoutItem);
 

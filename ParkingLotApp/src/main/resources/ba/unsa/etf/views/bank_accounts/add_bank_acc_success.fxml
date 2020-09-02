@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<View prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.bank_accounts.AddBankAccSuccessPresenter">
+    <center>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/success_icon.png" />
+                    </image>
+                </ImageView>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Successfully created new bank account." />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click on the button below to see all bank accounts." />
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToAllAccounts" prefHeight="65.0" prefWidth="179.0" text="All bank accounts">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToAllParkings" prefHeight="65.0" prefWidth="179.0" text="Reserve parking spot">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </center>
+</View>
