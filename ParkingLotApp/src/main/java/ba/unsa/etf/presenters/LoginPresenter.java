@@ -13,10 +13,11 @@ import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 
-import static ba.unsa.etf.GluonApplication.HOMEPAGE_VIEW;
-import static ba.unsa.etf.GluonApplication.SIGNUP_VIEW;
+import static ba.unsa.etf.GluonApplication.*;
 
 
 public class LoginPresenter {
@@ -66,5 +67,9 @@ public class LoginPresenter {
 //        } catch (IOException e) {
 //           System.out.println(e.getMessage());
 //        }
+    }
+
+    public void forgotPassword() {
+        MobileApplication.getInstance().switchView(PASSWORD_RECOVERY_VIEW);
     }
 }

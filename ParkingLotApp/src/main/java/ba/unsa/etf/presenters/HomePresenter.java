@@ -201,7 +201,7 @@ public class HomePresenter {
                             + "\",\"registrationPlateId\":\"" + registrationPlateId
                             + "\",\"startingTime\":\"" + startingTime
                             + "\",\"endingTime\":\"" + endingTime
-                            + "\",\"price\":\"" + price + "\"}}", true);
+                            + "\",\"price\":\"" + price + "\"}", true);
             if(httpResponse.getCode() == 200) {
                 MobileApplication.getInstance().switchView(PAYMENT_SUCCESS_VIEW);
             } else {

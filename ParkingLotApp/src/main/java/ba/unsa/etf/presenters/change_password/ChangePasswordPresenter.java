@@ -80,7 +80,7 @@ public class ChangePasswordPresenter {
     public void getSecurityQuestion() {
         HttpResponse httpResponse = null;
         try {
-            httpResponse = HttpUtils.POST("api/change/sequrityquestion", "{}", true);
+            httpResponse = HttpUtils.POST("api/change/securityquestion", "{}", true);
             if(httpResponse.getCode() == 200) {
                 System.out.println(httpResponse.getMessage());
                securityQuestion.setText("Answer security question: " + httpResponse.getMessage().getJsonObject(0).getString("title"));
@@ -126,7 +126,7 @@ public class ChangePasswordPresenter {
     public void validateAnswer() {
         answer.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() == 0) {
-                answerValidator.setText("Enter answer for chosen sequrity question!");
+                answerValidator.setText("Enter answer for chosen security question!");
                 answerValidator.setVisible(true);
                 changePassBtn.setDisable(true);
             } else {

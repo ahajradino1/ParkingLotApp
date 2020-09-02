@@ -7,6 +7,7 @@ import ba.unsa.etf.views.bank_accounts.AddBankAccountView;
 import ba.unsa.etf.views.bank_accounts.BankAccountsView;
 import ba.unsa.etf.views.change_password.ChangePasswordSuccessView;
 import ba.unsa.etf.views.change_password.ChangePasswordView;
+import ba.unsa.etf.views.PasswordRecoveryView;
 import ba.unsa.etf.views.registration_plates.AddRegPlateSuccessView;
 import ba.unsa.etf.views.registration_plates.AddRegistrationPlateView;
 import ba.unsa.etf.views.registration_plates.RegistrationPlateView;
@@ -21,7 +22,6 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.File;
 
@@ -43,6 +43,7 @@ public class GluonApplication extends MobileApplication {
     public static final String ADD_REG_PLATE_SUCCESS_VIEW = "Successfully Added Registration Plate View";
     public static final String PAYMENT_SUCCESS_VIEW = "Successful Payment View";
     public static final String CHANGE_PASSWORD_SUCCESS_VIEW = "Successfully Changed Password View";
+    public static final String PASSWORD_RECOVERY_VIEW = "Password Recovery View";
 
     public static NavigationDrawer menu = new NavigationDrawer();
     public static BottomNavigation bottomNavigation = new BottomNavigation();
@@ -65,6 +66,7 @@ public class GluonApplication extends MobileApplication {
         addViewFactory(ADD_REG_PLATE_SUCCESS_VIEW, () -> new AddRegPlateSuccessView().getView());
         addViewFactory(PAYMENT_SUCCESS_VIEW, () -> new PaymentSuccessView().getView());
         addViewFactory(CHANGE_PASSWORD_SUCCESS_VIEW, () -> new ChangePasswordSuccessView().getView());
+        addViewFactory(PASSWORD_RECOVERY_VIEW, () -> new PasswordRecoveryView().getView());
     }
 
     @Override

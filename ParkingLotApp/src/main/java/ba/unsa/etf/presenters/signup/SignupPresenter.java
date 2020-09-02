@@ -67,7 +67,7 @@ public class SignupPresenter {
 
     private Question chosenQuestion;
 
-    private final ObservableList<Question> sequrityQuestions = FXCollections.observableArrayList();
+    private final ObservableList<Question> securityQuestions = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
@@ -98,9 +98,9 @@ public class SignupPresenter {
 
     public void openDialog() {
         Dialog dialog = new Dialog(false);
-    //    dialog.setTitleText("Pick sequrity question");
+    //    dialog.setTitleText("Pick security question");
         CharmListView<Question, Integer> charmListView = new CharmListView<>();
-        charmListView.setItems(sequrityQuestions);
+        charmListView.setItems(securityQuestions);
         charmListView.setPadding(new Insets(5,5,5,5));
         charmListView.setCellFactory(new Callback<CharmListView<Question, Integer>, CharmListCell<Question>>() {
             @Override
@@ -165,8 +165,8 @@ public class SignupPresenter {
     public void convertToObservableList (JsonArray dbQuestions) {
         for(int i = 0; i < dbQuestions.size(); i++) {
             JsonObject question = dbQuestions.getJsonObject(i);
-            sequrityQuestions.add(new Question(question.getInt("id"), question.getString("title")));
-            //comboBox.setItems(sequrityQuestions);
+            securityQuestions.add(new Question(question.getInt("id"), question.getString("title")));
+            //comboBox.setItems(securityQuestions);
         }
     }
 
@@ -306,7 +306,7 @@ public class SignupPresenter {
     public void validateAnswer() {
         answer.textProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.length() == 0) {
-                answerValidator.setText("Enter answer for chosen sequrity question!");
+                answerValidator.setText("Enter answer for chosen security question!");
                 answerValidator.setVisible(true);
                 signupBtn.setDisable(true);
             } else {
