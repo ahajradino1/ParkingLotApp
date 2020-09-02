@@ -66,7 +66,12 @@ public class ChangePasswordPresenter {
                             + "\",\"answer\":\"" + answer.getText()
                             + "\"}", true);
             if (httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
-                MobileApplication.getInstance().switchView(CHANGE_PASSWORD_SUCCESS_VIEW);
+                if(httpResponse.getMessage().getJsonObject(0).getBoolean("success"))
+                    MobileApplication.getInstance().switchView(CHANGE_PASSWORD_SUCCESS_VIEW);
+                else {
+                    Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, "Wrong answer!");
+                    alert.showAndWait();
+                }
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
                 alert.showAndWait();
