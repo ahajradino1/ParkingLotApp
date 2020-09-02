@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.ExpansionPanelContainer?>
 <?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -9,7 +8,7 @@
 
 <View fx:id="bankAccountsView" onShown="#setItems" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.bank_accounts.BankAccountsPresenter">
    <bottom>
-      <Button onAction="#addAccount" mnemonicParsing="false" text="Add bank account" BorderPane.alignment="CENTER" />
+      <Button mnemonicParsing="false" onAction="#addAccount" prefHeight="32.0" prefWidth="355.0" text="Add bank account" textAlignment="CENTER" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
       <ScrollPane fx:id="scrollView" fitToWidth="true" hbarPolicy="NEVER">

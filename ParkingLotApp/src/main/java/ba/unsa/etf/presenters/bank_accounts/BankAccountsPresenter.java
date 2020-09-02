@@ -18,11 +18,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import java.io.File;
 import java.io.IOException;
 
 import static ba.unsa.etf.GluonApplication.ADD_BANK_ACCOUNT_VIEW;
@@ -46,7 +48,6 @@ public class BankAccountsPresenter {
                 appBar.setTitleText("Bank accounts");
             }
         });
-      //  setItems();
     }
 
     public void setItems() {
@@ -108,8 +109,10 @@ public class BankAccountsPresenter {
             }
             scrollView.setContent(accountsContainer);
         } else {
-            Text text = new Text("You have not added any bank account.");
-            scrollView.setContent(text);
+            ImageView noData = new ImageView(new File("src/main/resources/ba/unsa/etf/images/no_data.png").toURI().toString());
+            noData.setFitWidth(100);
+            noData.setFitWidth(100);
+            scrollView.setContent(noData);
         }
     }
 

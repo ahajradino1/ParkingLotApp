@@ -79,14 +79,12 @@ public class GluonApplication extends MobileApplication {
 
 
     public static void createDrawer() {
-        //todo promijeniti ikonu - neka bude ista kao za app
-        NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
-                "Multi View Project",
-                new Avatar(21, new Image(new File("src/main/resources/ba/unsa/etf/images/icon.png").toURI().toString())));
+        NavigationDrawer.Header header = new NavigationDrawer.Header("Parking Lot",
+                "Sarajevo",
+                new Avatar(21, new Image(new File("src/main/resources/ba/unsa/etf/images/icon2.png").toURI().toString())));
 
         menu.setHeader(header);
 
-        //todo osmisliti sta ce sve biti u ovom meniju -  za sad su one defaultne 3 opcije
         final NavigationDrawer.Item homeItem = new NavigationDrawer.ViewItem("Home", MaterialDesignIcon.HOME.graphic(), HOMEPAGE_VIEW);
         final NavigationDrawer.Item receiptsItem = new NavigationDrawer.ViewItem("Tickets", MaterialDesignIcon.RECEIPT.graphic(), TICKETS_VIEW);
         final NavigationDrawer.Item accountItem = new NavigationDrawer.ViewItem("Change password", MaterialDesignIcon.VPN_KEY.graphic(), CHANGE_PASSWORD_VIEW);

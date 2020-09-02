@@ -19,7 +19,7 @@
     <top>
         <ImageView fitHeight="62.0" fitWidth="231.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
             <image>
-                <Image url="@../images/logo.PNG" />
+                <Image url="@../images/logo1.png" />
             </image>
         </ImageView>
     </top>
@@ -36,7 +36,7 @@
                         <Insets top="25.0" />
                     </VBox.margin>
                 </PasswordField>
-            <Label text="Forgot password?" textAlignment="CENTER" underline="true" />
+            <Label onMouseClicked="#forgotPassword" text="Forgot password?" textAlignment="CENTER" underline="true" />
                 <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#login" opacity="0.88" prefHeight="33.0" prefWidth="121.0" text="LOGIN">
                     <VBox.margin>
                         <Insets top="15.0" />
