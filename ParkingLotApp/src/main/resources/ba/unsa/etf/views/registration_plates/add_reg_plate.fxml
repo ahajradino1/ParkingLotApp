@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<View fx:id="addRegPlateView" onShown="#validateRegNumber" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.registration_plates.AddRegistrationPlatePresenter">
+<View fx:id="addRegPlateView" onShown="#validateRegNumber" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.presenters.registration_plates.AddRegistrationPlatePresenter">
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="344.0" prefWidth="236.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
