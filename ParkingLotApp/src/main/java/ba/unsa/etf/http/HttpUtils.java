@@ -14,8 +14,8 @@ public class HttpUtils {
     private HttpUtils() {}
 
     public static HttpResponse GET(String path, Boolean authorization) throws IOException {
-        URL url = new URL("http://localhost:8080/" + path);
-      //  URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
+       // URL url = new URL("http://localhost:8080/" + path);
+        URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
@@ -42,8 +42,8 @@ public class HttpUtils {
     }
 
     public static HttpResponse POST(String path, String body, Boolean authorization) throws IOException {
-        URL url = new URL("http://localhost:8080/" + path);
-      //  URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
+        //URL url = new URL("http://localhost:8080/" + path);
+        URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -73,15 +73,14 @@ public class HttpUtils {
         connection.disconnect();
         JsonReader jsonReader = Json.createReader(new StringReader(res));
         JsonArray jsonArray = jsonReader.readArray();
-       // JsonObject jsonObject = jsonReader.readObject();
         jsonReader.close();
 
         return new HttpResponse(statusCode, jsonArray);
     }
 
     public static HttpResponse DELETE (String path, Boolean authorization) throws IOException {
-        URL url = new URL("http://localhost:8080/" + path);
-        //URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
+        //URL url = new URL("http://localhost:8080/" + path);
+        URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         connection.setRequestProperty("Accept", "application/json");
@@ -105,9 +104,5 @@ public class HttpUtils {
         JsonArray jsonArray = jsonReader.readArray();
         jsonReader.close();
         return new HttpResponse(statusCode, jsonArray);
-    }
-
-    public boolean isArray (String s) {
-        return s.charAt(0) == '[';
     }
 }
