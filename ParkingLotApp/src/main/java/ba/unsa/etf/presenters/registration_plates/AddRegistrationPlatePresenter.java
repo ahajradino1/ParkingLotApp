@@ -48,7 +48,7 @@ public class AddRegistrationPlatePresenter {
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtils.POST("api/plates/add",
-                    "{\"registrationNumber\":\"" + registrationNumber.getText() + "\"}", true);
+                    "{\"registrationNumber\":\"" + registrationNumber.getText().toUpperCase() + "\"}", true);
             if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 MobileApplication.getInstance().switchView(ADD_REG_PLATE_SUCCESS_VIEW);
             } else {

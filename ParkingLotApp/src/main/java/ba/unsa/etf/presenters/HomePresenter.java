@@ -300,12 +300,24 @@ public class HomePresenter {
             comboBox.setItems(bankAccounts);
             comboBox.setStyle("-fx-background-color: bisque");
             comboBox.setPrefHeight(40);
-            comboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<BankAccount>() {
+            comboBox.setCellFactory(new Callback<ListView<BankAccount>, ListCell<BankAccount>>() {
                 @Override
-                public void changed(ObservableValue<? extends BankAccount> observable, BankAccount oldValue, BankAccount newValue) {
-                    chosenBankAccount = newValue;
+                public ListCell<BankAccount> call(ListView<BankAccount> param) {
+                    return new ListCell<BankAccount>() {
+                        {
+                            super.setPrefHeight(40);
+                        }
+                        @Override public void updateItem(BankAccount item,
+                                                         boolean empty) {
+                            super.updateItem(item, empty);
+                            if (item != null) {
+                                setText(item.getCardNumber());
+                            }
+                        }
+                    };
                 }
             });
+            comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> chosenBankAccount = newValue);
             pickBankAcc = comboBox;
         }
         Node pickRegistrationPlate = null;
@@ -327,6 +339,23 @@ public class HomePresenter {
             comboBox.setItems(registrationPlates);
             comboBox.setStyle("-fx-background-color: bisque");
             comboBox.setPrefHeight(40);
+            comboBox.setCellFactory(new Callback<ListView<RegistrationPlate>, ListCell<RegistrationPlate>>() {
+                @Override
+                public ListCell<RegistrationPlate> call(ListView<RegistrationPlate> param) {
+                    return new ListCell<RegistrationPlate>() {
+                        {
+                            super.setPrefHeight(40);
+                        }
+                        @Override public void updateItem(RegistrationPlate item,
+                                                         boolean empty) {
+                            super.updateItem(item, empty);
+                            if (item != null) {
+                                setText(item.getRegistrationNumber());
+                            }
+                        }
+                    };
+                }
+            });
             comboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> chosenRegistrationPlate = newValue);
             pickRegistrationPlate = comboBox;
         }

@@ -188,11 +188,6 @@ public class TicketsPresenter {
                 JsonObject ticket = dbTickets.getJsonObject(i);
                 JsonObject parkingLotObject = ticket.getJsonObject("parkingLot");
                 ParkingLot parkingLot = new ParkingLot(parkingLotObject.getJsonNumber("id").longValue(), parkingLotObject.getString("zoneCode"), parkingLotObject.getString("streetAddress"), parkingLotObject.getString("municipality"), parkingLotObject.getJsonNumber("price").doubleValue());
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                format.setTimeZone(TimeZone.getTimeZone("CEST"));
-                Date startingTime = format.parse(ticket.getString("startingTime"));
-                Date endingTime = format.parse(ticket.getString("endingTime"));
-
                 activeTickets.add(new Ticket(ticket.getString("ticketId"), ticket.getString("cardNumber"), ticket.getString("registrationNumber"), parkingLot, ticket.getString("startingTime"), ticket.getString("endingTime"), ticket.getJsonNumber("price").doubleValue()));
             }
         } else {
