@@ -30,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.EventListener;
 import java.util.TimeZone;
 
 public class TicketsPresenter {
@@ -39,6 +40,7 @@ public class TicketsPresenter {
     private final ObservableList<Ticket> allTickets = FXCollections.observableArrayList();
     private final ObservableList<Ticket> activeTickets = FXCollections.observableArrayList();
     private final CharmListView<Ticket, Integer> charmListView = new CharmListView();
+    private BottomNavigation bottomNavigation;
 
     public void initialize() {
         tickets.showingProperty().addListener((obs, oldValue, newValue) -> {
@@ -49,21 +51,24 @@ public class TicketsPresenter {
                 appBar.setTitleText("Tickets");
             }
         });
-    }
-
-    public void onShown() {
-        BottomNavigation bottomNavigation = new BottomNavigation();
+        bottomNavigation = new BottomNavigation();
+        getAllTickets();
+        getActiveTickets();
         BottomNavigationButton btn1 = new BottomNavigationButton("All tickets", MaterialDesignIcon.LIST.graphic(), e -> setListItems(true));
         BottomNavigationButton btn2 = new BottomNavigationButton("Active tickets", MaterialDesignIcon.TIMER.graphic(), e -> setListItems(false));
         bottomNavigation.getActionItems().addAll(btn1, btn2);
-        bottomNavigation.getActionItems().get(0).fire();
         tickets.setBottom(bottomNavigation);
+        bottomNavigation.getActionItems().get(0).fire();
         onItemSelected();
     }
 
-    public void setListItems(boolean all) {
+    public void onShown() {
         getAllTickets();
         getActiveTickets();
+        bottomNavigation.getActionItems().get(0).fire();
+    }
+
+    public void setListItems(boolean all) {
         if(all && allTickets.size() != 0) {
             charmListView.setItems(allTickets);
             customizeListItem(all);
