@@ -159,17 +159,38 @@ public class HomePresenter {
             dialog.setContent(dialogContent(newValue));
             Button payButton = new Button("PAY");
             payButton.setOnAction(event -> {
-                Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "By continuing you will be charged " + price + " KM for selected parking spot.");
-                alert.showAndWait().ifPresent(result -> {
-                    if (result == ButtonType.OK) {
-                        proceedWithPayment(newValue.getId(), chosenBankAccount.getId(), chosenRegistrationPlate.getId(), currentDateTime.toString() + "+02:00", pickedDateTime.toString() + "+02:00", price);
-                    }
-                });
+                Alert alert;
+                if (isCarParked()) {
+                    alert = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION, "Car with registration plate number " + chosenRegistrationPlate.getRegistrationNumber() + " is already parked!");
+                    alert.showAndWait();
+                } else {
+                    alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION, "By continuing you will be charged " + price + " KM for selected parking spot.");
+                    alert.showAndWait().ifPresent(result -> {
+                        if (result == ButtonType.OK) {
+                            proceedWithPayment(newValue.getId(), chosenBankAccount.getId(), chosenRegistrationPlate.getId(), currentDateTime.toString() + "+02:00", pickedDateTime.toString() + "+02:00", price);
+                            dialog.hide();
+                        }
+                    });
+                }
             });
             dialog.getButtons().addAll(payButton);
 
             dialog.showAndWait();
         });
+    }
+
+    private boolean isCarParked() {
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = HttpUtils.POST("api/tickets/active/" + chosenRegistrationPlate.getId(),
+                    "{\"currentDate\":\"" + currentDateTime.toString().replace('T', ' ') + "\"}", true);
+            if(httpResponse.getCode() == 200) {
+                return httpResponse.getMessage().size() != 0;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private void proceedWithPayment(Long parkingLotId,

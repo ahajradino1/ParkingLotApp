@@ -87,7 +87,6 @@ public class ChangePasswordPresenter {
         try {
             httpResponse = HttpUtils.POST("api/change/securityquestion", "{}", true);
             if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
-                System.out.println(httpResponse.getMessage());
                securityQuestion.setText("Answer security question: " + httpResponse.getMessage().getJsonObject(0).getString("title"));
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));

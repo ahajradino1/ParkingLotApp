@@ -207,7 +207,6 @@ public class AddBankAccountPresenter {
 
     public void convertToObservableList (JsonArray dbBanks) {
         bankList.clear();
-        System.out.println(bankList.size());
         for(int i = 0; i < dbBanks.size(); i++) {
             JsonObject bank = dbBanks.getJsonObject(i);
             bankList.add(new Bank((long) bank.getInt("id"), bank.getString("bankName")));

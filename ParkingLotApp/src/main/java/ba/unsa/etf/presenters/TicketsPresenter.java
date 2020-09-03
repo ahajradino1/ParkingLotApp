@@ -3,9 +3,7 @@ package ba.unsa.etf.presenters;
 import ba.unsa.etf.GluonApplication;
 import ba.unsa.etf.http.HttpResponse;
 import ba.unsa.etf.http.HttpUtils;
-import ba.unsa.etf.models.BankAccount;
 import ba.unsa.etf.models.ParkingLot;
-import ba.unsa.etf.models.RegistrationPlate;
 import ba.unsa.etf.models.Ticket;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.*;
@@ -13,14 +11,8 @@ import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.Dialog;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.maps.MapPoint;
-import com.gluonhq.maps.MapView;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -31,10 +23,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -119,7 +109,7 @@ public class TicketsPresenter {
     public void onItemSelected() {
         charmListView.selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             Dialog dialog = new Dialog(true);
-            dialog.setTitleText("");
+            dialog.setTitleText("Ticket details");
             dialog.setContent(dialogContent(newValue));
             dialog.showAndWait();
         });

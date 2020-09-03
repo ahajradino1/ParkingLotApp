@@ -6,7 +6,6 @@ import javax.json.JsonArray;
 import javax.json.JsonReader;
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import static ba.unsa.etf.presenters.LoginPresenter.TOKEN;
@@ -15,8 +14,8 @@ public class HttpUtils {
     private HttpUtils() {}
 
     public static HttpResponse GET(String path, Boolean authorization) throws IOException {
-      //  URL url = new URL("http://localhost:8080/" + path);
-        URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
+        URL url = new URL("http://localhost:8080/" + path);
+      //  URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/json");
@@ -37,16 +36,14 @@ public class HttpUtils {
         }
         connection.disconnect();
         JsonReader jsonReader = Json.createReader(new StringReader(response));
-      //  JsonObject jsonObject = jsonReader.readObject();
         JsonArray jsonArray = jsonReader.readArray();
         jsonReader.close();
-        System.out.println(jsonArray);
         return new HttpResponse(statusCode, jsonArray);
     }
 
     public static HttpResponse POST(String path, String body, Boolean authorization) throws IOException {
-      //  URL url = new URL("http://localhost:8080/" + path);
-        URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
+        URL url = new URL("http://localhost:8080/" + path);
+      //  URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -83,8 +80,8 @@ public class HttpUtils {
     }
 
     public static HttpResponse DELETE (String path, Boolean authorization) throws IOException {
-        //URL url = new URL("http://localhost:8080/" + path);
-        URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
+        URL url = new URL("http://localhost:8080/" + path);
+        //URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         connection.setRequestProperty("Accept", "application/json");
@@ -105,10 +102,8 @@ public class HttpUtils {
         }
         connection.disconnect();
         JsonReader jsonReader = Json.createReader(new StringReader(response));
-        //  JsonObject jsonObject = jsonReader.readObject();
         JsonArray jsonArray = jsonReader.readArray();
         jsonReader.close();
-        System.out.println(jsonArray);
         return new HttpResponse(statusCode, jsonArray);
     }
 
