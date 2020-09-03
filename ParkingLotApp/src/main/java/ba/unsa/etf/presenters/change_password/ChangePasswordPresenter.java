@@ -54,7 +54,7 @@ public class ChangePasswordPresenter {
         });
         getSecurityQuestion();
         validateAnswer();
-        validateConfirmPassword();
+        validatePasswords();
     }
 
     public void changePassword() {
@@ -97,10 +97,10 @@ public class ChangePasswordPresenter {
         }
     }
 
-    public void validateConfirmPassword() {
+    public void validatePasswords() {
         newPassword.textProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue.length() == 0) {
-                newPassword.setText("Enter password please!");
+            if(newValue.length() < 6 || newValue.length() > 20) {
+                passwordValidator.setText("Password must contain between 6 and 20 characters!");
                 passwordValidator.setVisible(true);
                 changePassBtn.setDisable(true);
             } else if(newPasswordConfirm.getText().length() != 0 && !newValue.equals(newPasswordConfirm.getText())) {

@@ -143,7 +143,7 @@ public class TicketsPresenter {
         labels.setAlignment(Pos.CENTER_LEFT);
         ticketDetails.setLeft(labels);
 
-        VBox rightSide = new VBox(new Label(ticket.getStartingTime().toString()), new Label(ticket.getEndingTime().toString()), new Label(ticket.getPrice() + " KM"));
+        VBox rightSide = new VBox(new Label(ticket.getStartingTime()), new Label(ticket.getEndingTime()), new Label(ticket.getPrice() + " KM"));
         rightSide.setSpacing(10);
         ticketDetails.setRight(rightSide);
         ticketDetails.setPadding(new Insets(0, 10, 0, 10));
@@ -183,11 +183,12 @@ public class TicketsPresenter {
                 JsonObject ticket = dbTickets.getJsonObject(i);
                 JsonObject parkingLotObject = ticket.getJsonObject("parkingLot");
                 ParkingLot parkingLot = new ParkingLot(parkingLotObject.getJsonNumber("id").longValue(), parkingLotObject.getString("zoneCode"), parkingLotObject.getString("streetAddress"), parkingLotObject.getString("municipality"), parkingLotObject.getJsonNumber("price").doubleValue());
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 format.setTimeZone(TimeZone.getTimeZone("CEST"));
                 Date startingTime = format.parse(ticket.getString("startingTime"));
                 Date endingTime = format.parse(ticket.getString("endingTime"));
-                activeTickets.add(new Ticket(ticket.getString("ticketId"), ticket.getString("cardNumber"), ticket.getString("registrationNumber"), parkingLot, startingTime, endingTime, ticket.getJsonNumber("price").doubleValue()));
+
+                activeTickets.add(new Ticket(ticket.getString("ticketId"), ticket.getString("cardNumber"), ticket.getString("registrationNumber"), parkingLot, ticket.getString("startingTime"), ticket.getString("endingTime"), ticket.getJsonNumber("price").doubleValue()));
             }
         } else {
             Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));

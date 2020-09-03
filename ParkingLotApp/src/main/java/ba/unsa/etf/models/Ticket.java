@@ -1,17 +1,16 @@
 package ba.unsa.etf.models;
 
-import java.util.Date;
 
 public class Ticket {
     private String id;
     private String cardNumber;
     private String registrationNumber;
     private ParkingLot parkingLot;
-    private Date startingTime;
-    private Date endingTime;
+    private String startingTime;
+    private String endingTime;
     private Double price;
 
-    public Ticket(String id, String cardNumber, String registrationNumber, ParkingLot parkingLot, Date startingTime, Date endingTime, Double price) {
+    public Ticket(String id, String cardNumber, String registrationNumber, ParkingLot parkingLot, String startingTime, String endingTime, Double price) {
         this.id = id;
         this.cardNumber = cardNumber;
         this.registrationNumber = registrationNumber;
@@ -53,19 +52,19 @@ public class Ticket {
         this.parkingLot = parkingLot;
     }
 
-    public Date getStartingTime() {
+    public String getStartingTime() {
         return startingTime;
     }
 
-    public void setStartingTime(Date startingTime) {
+    public void setStartingTime(String startingTime) {
         this.startingTime = startingTime;
     }
 
-    public Date getEndingTime() {
+    public String getEndingTime() {
         return endingTime;
     }
 
-    public void setEndingTime(Date endingTime) {
+    public void setEndingTime(String endingTime) {
         this.endingTime = endingTime;
     }
 
