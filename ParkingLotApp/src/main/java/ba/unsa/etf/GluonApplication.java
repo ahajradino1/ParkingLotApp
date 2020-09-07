@@ -16,6 +16,7 @@ import ba.unsa.etf.views.signup.SignupView;
 import com.gluonhq.charm.down.Platform;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.LifecycleService;
+import com.gluonhq.charm.down.plugins.StatusBarService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.*;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -24,11 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-import java.io.File;
-
 public class GluonApplication extends MobileApplication {
-    public static final String PRIMARY_VIEW = "Primary Vire";
-    public static final String SECONDARY_VIEW = "Secondary View";
     public static final String LOGIN_VIEW = HOME_VIEW;
     public static final String SIGNUP_VIEW = "Signup View";
     public static final String SIGNUP_SUCCESS_VIEW = "Signup Success View";
@@ -73,10 +70,13 @@ public class GluonApplication extends MobileApplication {
     @Override
     public void postInit(Scene scene) {
         Swatch.RED.assignTo(scene);
+        Services.get(StatusBarService.class).ifPresent(service -> {
+            service.setColor(Color.BLACK);
+        });
         scene.getStylesheets().add(GluonApplication.class.getResource("style.css").toExternalForm());
         createDrawer();
         createBottomNavigation();
-        this.getStatusBar().setColor(Color.BLACK);
+
     }
 
     public static void createDrawer() {
