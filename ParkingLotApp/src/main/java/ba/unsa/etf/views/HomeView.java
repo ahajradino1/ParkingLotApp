@@ -1,6 +1,5 @@
 package ba.unsa.etf.views;
 
-import ba.unsa.etf.GluonApplication;
 import com.gluonhq.charm.glisten.mvc.View;
 import javafx.fxml.FXMLLoader;
 
@@ -10,9 +9,7 @@ public class HomeView {
 
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("homepage.fxml"));
-          //  view.setBottom(GluonApplication.bottomNavigation);
-            return view;
+            return FXMLLoader.load(LoginView.class.getResource("homepage.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();

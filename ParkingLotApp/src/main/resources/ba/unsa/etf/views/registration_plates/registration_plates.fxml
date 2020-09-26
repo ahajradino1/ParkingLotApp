@@ -10,11 +10,4 @@
     <bottom>
         <Button mnemonicParsing="false" onAction="#addRegistrationPlates" prefHeight="36.0" prefWidth="350.0" text="Add registration plate" textAlignment="CENTER" BorderPane.alignment="CENTER" />
     </bottom>
-    <center>
-        <ScrollPane fx:id="scrollView" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </ScrollPane>
-    </center>
 </View>

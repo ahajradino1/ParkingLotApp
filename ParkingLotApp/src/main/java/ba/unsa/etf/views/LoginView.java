@@ -8,8 +8,7 @@ public class LoginView {
 
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("login.fxml"));
-            return view;
+            return FXMLLoader.load(LoginView.class.getResource("login.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();

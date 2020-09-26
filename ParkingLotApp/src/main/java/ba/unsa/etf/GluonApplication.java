@@ -76,7 +76,6 @@ public class GluonApplication extends MobileApplication {
         scene.getStylesheets().add(GluonApplication.class.getResource("style.css").toExternalForm());
         createDrawer();
         createBottomNavigation();
-
     }
 
     public static void createDrawer() {
@@ -98,7 +97,6 @@ public class GluonApplication extends MobileApplication {
         });
         menu.getItems().addAll(homeItem, accountItem, receiptsItem, bankAccountsItem, registrationPlatesItem, logoutItem);
 
-        //todo ovo na kraju treba da obrisem jer app nije predvidjena za desktop
         if (Platform.isDesktop()) {
             final NavigationDrawer.Item quitItem = new NavigationDrawer.Item("Quit", MaterialDesignIcon.EXIT_TO_APP.graphic());
             quitItem.selectedProperty().addListener((obs, ov, nv) -> {

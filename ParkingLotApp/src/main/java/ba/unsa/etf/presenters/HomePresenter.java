@@ -12,8 +12,6 @@ import com.gluonhq.charm.glisten.control.Dialog;
 import com.gluonhq.charm.glisten.control.TextField;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -30,7 +28,6 @@ import javafx.util.Callback;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -43,9 +40,6 @@ public class HomePresenter {
 
     @FXML
     private View homepage;
-
-    @FXML
-    private ScrollPane scrollPane;
 
     @FXML
     private TextField searchParking;
@@ -108,11 +102,12 @@ public class HomePresenter {
                     };
                 }
             });
-            scrollPane.setContent(charmListView);
+          //  scrollPane.setContent(charmListView);
+            homepage.setCenter(charmListView);
 
         } else {
-            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
-            scrollPane.setContent(noData);
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no data.png")));
+            homepage.setCenter(noData);
         }
     }
 

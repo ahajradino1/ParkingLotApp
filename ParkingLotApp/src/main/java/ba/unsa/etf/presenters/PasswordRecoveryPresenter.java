@@ -8,8 +8,6 @@ import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.ProgressBar;
 import com.gluonhq.charm.glisten.control.TextField;
 import com.gluonhq.charm.glisten.mvc.View;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

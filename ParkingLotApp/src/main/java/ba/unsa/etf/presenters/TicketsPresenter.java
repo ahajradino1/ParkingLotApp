@@ -27,11 +27,8 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.EventListener;
-import java.util.TimeZone;
+
 
 public class TicketsPresenter {
     @FXML
@@ -71,12 +68,12 @@ public class TicketsPresenter {
     public void setListItems(boolean all) {
         if(all && allTickets.size() != 0) {
             charmListView.setItems(allTickets);
-            customizeListItem(all);
+            customizeListItem(true);
         } else if(!all && activeTickets.size() != 0) {
             charmListView.setItems(activeTickets);
-            customizeListItem(all);
+            customizeListItem(false);
         } else {
-            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no data.png")));
             tickets.setCenter(noData);
         }
     }

@@ -16,12 +16,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
-
 import javax.json.JsonArray;
 import javax.json.JsonObject;
-import java.io.File;
 import java.io.IOException;
 
 import static ba.unsa.etf.GluonApplication.ADD_REG_PLATE_VIEW;
@@ -30,9 +27,6 @@ public class RegistrationPlatePresenter {
 
     @FXML
     private View registrationPlatesView;
-
-    @FXML
-    private ScrollPane scrollView;
 
     private final ObservableList<RegistrationPlate> registrationPlates = FXCollections.observableArrayList();
 
@@ -83,11 +77,10 @@ public class RegistrationPlatePresenter {
                     };
                 }
             });
-
-           scrollView.setContent(charmListView);
+            registrationPlatesView.setCenter(charmListView);
         } else {
-            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
-            scrollView.setContent(noData);
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no data.png")));
+            registrationPlatesView.setCenter(noData);
         }
     }
 
@@ -96,7 +89,7 @@ public class RegistrationPlatePresenter {
         try {
             httpResponse = HttpUtils.DELETE("api/plates/delete/" + plateId, true);
             Alert alert = new Alert(javafx.scene.control.Alert.AlertType.INFORMATION, httpResponse.getMessage().getJsonObject(0).getString("text"));
-            if (httpResponse.getCode() != 200 || httpResponse.getCode() == 201)
+            if (httpResponse.getCode() != 200 || httpResponse.getCode() != 201)
                 alert.setAlertType(javafx.scene.control.Alert.AlertType.ERROR);
             alert.showAndWait();
         } catch (IOException e) {

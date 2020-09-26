@@ -9,8 +9,7 @@ import java.io.IOException;
 public class AddBankAccSuccessView {
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("bank_accounts/add_bank_acc_success.fxml"));
-            return view;
+            return FXMLLoader.load(LoginView.class.getResource("bank_accounts/add_bank_acc_success.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();

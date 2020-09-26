@@ -14,10 +14,13 @@ public class HttpUtils {
     private HttpUtils() {}
 
     public static HttpResponse GET(String path, Boolean authorization) throws IOException {
-       // URL url = new URL("http://localhost:8080/" + path);
         URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
+        return getHttpResponse(authorization, connection);
+    }
+
+    private static HttpResponse getHttpResponse(Boolean authorization, HttpURLConnection connection) throws IOException {
         connection.setRequestProperty("Accept", "application/json");
         if (authorization)
             connection.setRequestProperty("Authorization", "Bearer " + TOKEN);
@@ -42,7 +45,6 @@ public class HttpUtils {
     }
 
     public static HttpResponse POST(String path, String body, Boolean authorization) throws IOException {
-        //URL url = new URL("http://localhost:8080/" + path);
         URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -79,30 +81,9 @@ public class HttpUtils {
     }
 
     public static HttpResponse DELETE (String path, Boolean authorization) throws IOException {
-        //URL url = new URL("http://localhost:8080/" + path);
         URL url = new URL("https://parking-lot-server.herokuapp.com/" + path);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
-        connection.setRequestProperty("Accept", "application/json");
-        if (authorization)
-            connection.setRequestProperty("Authorization", "Bearer " + TOKEN);
-
-        int statusCode = connection.getResponseCode();
-        BufferedReader br = new BufferedReader(new InputStreamReader(
-                (connection.getInputStream())));
-        String output;
-        String response = "";
-        while ((output = br.readLine()) != null) {
-            response += output;
-        }
-
-        if(response.charAt(0) == '{') {
-            response = "[" + response + "]";
-        }
-        connection.disconnect();
-        JsonReader jsonReader = Json.createReader(new StringReader(response));
-        JsonArray jsonArray = jsonReader.readArray();
-        jsonReader.close();
-        return new HttpResponse(statusCode, jsonArray);
+        return getHttpResponse(authorization, connection);
     }
 }

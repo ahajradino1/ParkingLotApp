@@ -75,9 +75,6 @@ public class AddBankAccountPresenter {
         getUserDetails();
         accountOwner.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
         accountOwner.setDisable(true);
-//        getBanks();
-//        validateCardNumber();
-//        validateCvc();
     }
 
     public void onShown() {

@@ -64,7 +64,6 @@ public class BankAccountsPresenter {
                 ExpansionPanel.CollapsedPanel collapsedPanel = new ExpansionPanel.CollapsedPanel();
                 collapsedPanel.getTitleNodes().addAll(bankName, cardNumber);
 
-                // Label expiryDate = new Label(account.getExpiryDate().toString());
                 Button deleteBtn = new Button("DELETE");
                 deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
@@ -87,9 +86,6 @@ public class BankAccountsPresenter {
                 accountDetails.add(new Label("Credit card number: "), 0, 1);
                 accountDetails.add(new Label(account.getCardNumber()), 1, 1);
                 accountDetails.add(new Label("Expiry date: "), 0, 2);
-               // Calendar date = Calendar.getInstance();
-                //date.setTime(account.getExpiryDate());
-              //  accountDetails.add(new Label(date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR)), 1, 2);
                 accountDetails.add(new Label(account.getExpiryDate()), 1, 2);
                 accountDetails.add(new Label("Bank name: "), 0, 3);
                 accountDetails.add(new Label(account.getBankName()), 1, 3);
@@ -110,9 +106,7 @@ public class BankAccountsPresenter {
             }
             scrollView.setContent(accountsContainer);
         } else {
-            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no_data.png")));
-            noData.setFitWidth(100);
-            noData.setFitWidth(100);
+            ImageView noData = new ImageView(new Image(GluonApplication.class.getResourceAsStream("images/no data.png")));
             scrollView.setContent(noData);
         }
     }
@@ -126,7 +120,6 @@ public class BankAccountsPresenter {
                 JsonArray dbBankAccounts = httpResponse.getMessage();
                 for(int i = 0; i < dbBankAccounts.size(); i++) {
                     JsonObject bankAccount = dbBankAccounts.getJsonObject(i);
-                    //Date expiryDate = new SimpleDateFormat("yyyy-dd-MM").parse(bankAccount.getString("expiryDate"));
                     bankAccounts.add(new BankAccount((long)bankAccount.getInt("id"), bankAccount.getString("accountOwner"), bankAccount.getString("bankName"), bankAccount.getString("expiryDate").substring(0, 10), bankAccount.getString("cardNumber")));
                 }
             } else {

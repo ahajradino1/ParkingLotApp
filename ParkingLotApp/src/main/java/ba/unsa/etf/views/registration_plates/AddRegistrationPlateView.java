@@ -9,9 +9,7 @@ import java.io.IOException;
 public class AddRegistrationPlateView {
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("registration_plates/add_reg_plate.fxml"));
-            //  view.setBottom(GluonApplication.bottomNavigation);
-            return view;
+            return FXMLLoader.load(LoginView.class.getResource("registration_plates/add_reg_plate.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();

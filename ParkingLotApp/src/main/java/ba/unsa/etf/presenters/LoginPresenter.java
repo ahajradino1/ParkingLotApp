@@ -1,19 +1,14 @@
 package ba.unsa.etf.presenters;
 
-
-import ba.unsa.etf.GluonApplication;
 import ba.unsa.etf.http.HttpResponse;
 import ba.unsa.etf.http.HttpUtils;
-import ba.unsa.etf.models.User;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.TextField;
 import com.gluonhq.charm.glisten.mvc.View;
-import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -53,7 +48,6 @@ public class LoginPresenter {
             if(httpResponse.getCode() == 200 || httpResponse.getCode() == 201) {
                 TOKEN = httpResponse.getMessage().getJsonObject(0).getString("accessToken");
                  MobileApplication.getInstance().switchView(HOMEPAGE_VIEW);
-
             } else {
                 Alert alert = new Alert(javafx.scene.control.Alert.AlertType.ERROR, httpResponse.getMessage().getJsonObject(0).getString("message"));
                 alert.showAndWait();

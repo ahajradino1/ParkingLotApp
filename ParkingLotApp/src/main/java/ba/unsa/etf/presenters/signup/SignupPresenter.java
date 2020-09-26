@@ -53,9 +53,6 @@ public class SignupPresenter {
     @FXML
     private PasswordField passwordConfirm;
 
-//    @FXML
-//    private ComboBox<Question> comboBox;
-
     @FXML
     private TextField answer;
 
@@ -83,8 +80,6 @@ public class SignupPresenter {
             HttpResponse httpResponse = HttpUtils.GET("questions", false);
             dbQuestions = httpResponse.getMessage();
             convertToObservableList(dbQuestions);
-//            comboBox.getSelectionModel().selectedItemProperty()
-//                    .addListener((ChangeListener<Question>) (observable, oldValue, newValue) -> chosenQuestion = newValue);
             validateFirstName();
             validateLastName();
             validateEmail();
@@ -98,7 +93,6 @@ public class SignupPresenter {
 
     public void openDialog() {
         Dialog dialog = new Dialog(false);
-    //    dialog.setTitleText("Pick security question");
         CharmListView<Question, Integer> charmListView = new CharmListView<>();
         charmListView.setItems(securityQuestions);
         charmListView.setPadding(new Insets(5,5,5,5));
@@ -166,7 +160,6 @@ public class SignupPresenter {
         for(int i = 0; i < dbQuestions.size(); i++) {
             JsonObject question = dbQuestions.getJsonObject(i);
             securityQuestions.add(new Question(question.getInt("id"), question.getString("title")));
-            //comboBox.setItems(securityQuestions);
         }
     }
 
@@ -205,7 +198,6 @@ public class SignupPresenter {
                 if(chosenQuestion != null && !lastNameValidator.isVisible() && !emailValidator.isVisible() && !usernameValidator.isVisible() && !passwordValidator.isVisible() && !confpassValidator.isVisible() && !answerValidator.isVisible())
                     signupBtn.setDisable(false);
             }
-            //todo ovdje mogu provjeriti jos da li sadrzi samo slova
         });
     }
 
@@ -224,7 +216,6 @@ public class SignupPresenter {
                 if(chosenQuestion != null && !firstNameValidator.isVisible() && !emailValidator.isVisible() && !usernameValidator.isVisible() && !passwordValidator.isVisible() && !confpassValidator.isVisible() && !answerValidator.isVisible())
                     signupBtn.setDisable(false);
             }
-            //todo ovdje mogu provjeriti jos da li sadrzi samo slova
         });
     }
 

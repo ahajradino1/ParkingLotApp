@@ -1,6 +1,5 @@
 package ba.unsa.etf.views;
 
-import ba.unsa.etf.GluonApplication;
 import com.gluonhq.charm.glisten.mvc.View;
 import javafx.fxml.FXMLLoader;
 

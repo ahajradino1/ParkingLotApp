@@ -10,8 +10,7 @@ public class SignupView {
 
     public View getView() {
         try {
-            View view = FXMLLoader.load(LoginView.class.getResource("signup/signup.fxml"));
-            return view;
+            return FXMLLoader.load(LoginView.class.getResource("signup/signup.fxml"));
         } catch (IOException e) {
             System.out.println("IOException: " + e);
             return new View();
