@@ -82,7 +82,6 @@ public class GluonApplication extends MobileApplication {
         NavigationDrawer.Header header = new NavigationDrawer.Header("Parking Lot",
                 "Sarajevo",
                 new Avatar(21, new Image(GluonApplication.class.getResourceAsStream("images/icon2.png"))));
-
         menu.setHeader(header);
 
         final NavigationDrawer.Item homeItem = new NavigationDrawer.ViewItem("Home", MaterialDesignIcon.HOME.graphic(), HOMEPAGE_VIEW);
